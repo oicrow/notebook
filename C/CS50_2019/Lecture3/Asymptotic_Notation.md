@@ -23,7 +23,7 @@ upper bound
 
 
 ## Omega notation
-Ω: 
+Ω: omega of
 
 minimum running time in the best case of an algorithm
 
@@ -40,3 +40,22 @@ lower bound
 > Ω(log *n*)
 >
 > Ω(1)                  linear search, binary search
+
+
+## Theta Notation
+Θ: theta of
+
+use when big O and omega is identical
+
+upper bound == lower bound
+
+
+> Θ(*n^2*)              selection sort
+>
+> Θ(*n* log *n*)        merge sort
+>
+> Θ(*n*)                
+>
+> Θ(log *n*)
+>
+> Θ(1)                  
