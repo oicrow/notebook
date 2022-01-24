@@ -11,9 +11,9 @@ upper bound
 
 
 
-> *O*(*n^2*)
+> *O*(*n^2*)            bubble sort, selection sort
 >
-> *O*(*n* log *n*)
+> *O*(*n* log *n*)      merge sort
 >
 > *O*(*n*)              linear search
 >
@@ -31,11 +31,11 @@ lower bound
 
 
 
-> Ω(*n^2*)
+> Ω(*n^2*)              selection sort
 >
-> Ω(*n* log *n*)
+> Ω(*n* log *n*)        merge sort
 >
-> Ω(*n*)              
+> Ω(*n*)                bubble sort
 >
 > Ω(log *n*)
 >
