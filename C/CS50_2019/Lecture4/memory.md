@@ -13,6 +13,14 @@ There is an agreed order of which types of data are stored in which parts of RAM
 
 <br/>
 
+## Buffer Overflow
+Heap : keep using malloc  
+　↓  
+\*boom\*  
+　↑  
+Stack : keep calling functions (e.g. recursive functions)  
+<br/><br/>
+
 ### Call by Value
 default function call type  
 cannot affect data in main stack frame
