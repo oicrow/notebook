@@ -1,10 +1,13 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 int main (void)
 {
-    char *s, t;
+    // char *s, t;  -> Error: scanf stores input string in memory that the second argument is pointing at, but s and t point at nowhere
+    char *s = malloc(16);
+    char *t = malloc(16);
     printf("s: ");
     scanf("%s", s);
     printf("t: ");
@@ -54,4 +57,7 @@ int main (void)
     // because s and t store different addresses
     printf("%p\n!=\n%p\n", s, t);
 
+
+    free(s);
+    free(t);
 }

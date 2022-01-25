@@ -7,7 +7,7 @@
 int main(void)
 {
     // Copy Linked
-    char *s;
+    char *s = malloc(16);
     printf("s: ");
     scanf("%s", s);
 
@@ -18,9 +18,11 @@ int main(void)
     printf("s: %s\n", s); // linked!
     printf("t: %s\n", t); // linked!
 
+    free(s);
+
 
     // Copy Unlinked
-    char *u;
+    char *u = malloc(16);
     printf("u: ");
     scanf("%s", u);
 
@@ -46,6 +48,7 @@ int main(void)
     printf("u: %s\n", u); // Not linked!
     printf("w: %s\n", w); // Not linked!
 
+    free(u);
     free(v);
     free(w);
 }
