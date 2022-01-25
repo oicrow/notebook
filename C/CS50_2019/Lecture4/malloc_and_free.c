@@ -17,9 +17,9 @@ int main (void)
     
     // Buffer Overflow
     int *x = malloc(10 * sizeof(int));
-    x[0] = 0
-    x[1] = 1
-    x[9] = 9
+    x[0] = 0;
+    x[1] = 1;
+    x[9] = 9;
     // x[10] = 10       ! Buffer Overflow
     // x[10000] = 10    ! Buffer Overflow
     free(x);
