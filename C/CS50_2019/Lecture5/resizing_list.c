@@ -1,6 +1,6 @@
 // to resize a list, you need to re-create and insert
 // in that case, inserting (resizing) is O(n), searching is O(log n) (given that it's sorted)
-// to improve this inefficiency, you can also use linked list (See list.c)
+// to improve this inefficiency, you can also use linked list
 
 #include <stdio.h>
 #include <stdlib.h> // malloc, free, realloc
