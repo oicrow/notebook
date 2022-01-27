@@ -67,22 +67,6 @@ int main(void)
     }
 
 
-    // Let tmp point at the last node
-    node *tmp = list;
-    while (tmp->next != NULL)
-    {
-        tmp = tmp->next;
-    }
-    // ... and link the new node to the last node of the list (tmp)
-    tmp->next = n;
-
-
-
-    // Insert the new node to the first of the list
-    n->next = list;
-    list = n;
-
-
     // Insert the new node to the middle of the list
     tmp = list;
     int i = 0
@@ -137,8 +121,9 @@ void add(node *list, int value)
         n->next = tmp;
         list = n;
     }
-    else                            // else, linkt the node after tmp
+    else                            // else, link the node after tmp
     {
-        
+        n->next = tmp->next;
+        tmp->next = n;
     }
 }
