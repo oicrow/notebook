@@ -1,4 +1,5 @@
 // Sorted linked list functions
+
 #include <stdio.h>
 #include <stdlib.h>     // malloc, free
 
@@ -9,83 +10,37 @@ typedef struct node
 }
 node;
 
+node *search_node(node *list, int value);
+void add_node(node *list, int value);
+void del_node(node *list, int value);
+void print_list(node *list);
+void free_list(node *list);
+
 int main(void)
 {
     // Create empty list
     node *list = NULL;
 
-    // Make 1st node and store value
-    node *n = malloc(sizeof(node));
-    if (n == NULL)
-    {
-        return 1;
-    }
-    (*n).number = 2;    // same as: n->number = 2;
-    n->next = NULL;
-    // Link it to the list
-    list = n;
-
-    // Make 2nd node and store value
-    n = malloc(sizeof(node));
-    if (n == NULL)
-    {
-        free(list);
-        return 1;
-    }
-    n->number = 4;
-    n->next = NULL;
-    // Link it to the list
-    list->next = n;
-
-    // Make 3rd node and store value
-    n = malloc(sizeof(node));
-    if (n == NULL)
-    {
-        free(list->next);
-        free(list);
-        return 1;
-    }
-    n->number = 4;
-    n->next = NULL;
-    // Link it to the list
-    list->next->next = n;
-
-
-    // print list
-    for (node *tmp = list; tmp != NULL; tmp = tmp->next)
-    {
-        printf("%i\n", tmp->number);
-    }
-
-
-    // free list
-    while (list != NULL)
-    {
-        node *tmp = list->next;
-        free(list);
-        list = tmp;
-    }
-
-
-    // Insert the new node to the middle of the list
-    tmp = list;
-    int i = 0
-    while (tmp->number < n->number)
-    {
-        tmp = tmp->next;
-        i++;
-    }
-    n->next = tmp;
-    tmp = list;
-    for(int j = 0; j < i - 1; j++)
-    {
-        tmp = tmp->next;
-    }
-    tmp->next = n;
-
 }
 
-void add(node *list, int value)
+node *search_node(node *list, int value)
+{
+    node *tmp = list;
+    while (tmp != NULL)
+    {
+        if(tmp->number == value)
+        {
+            printf("%i founded\n");
+            return tmp;
+        }
+        tmp = tmp->next;
+    }
+
+    printf("%i is not in the list.\n", value);
+    return NULL;
+}
+
+void add_node(node *list, int value)
 {
     // Create a new node with number value and next NULL
     node *n = malloc(sizeof(node));
@@ -125,5 +80,41 @@ void add(node *list, int value)
     {
         n->next = tmp->next;
         tmp->next = n;
+    }
+}
+
+void del_node(node *list, int value)
+{
+    // If list is empty, return.
+    if (list == NULL)
+    {
+        printf("List is already empty\n");
+        return;
+    }
+
+    // Searching for the value,
+    node *tmp = list;
+    // FIXME
+}
+
+void print_list(node *list)
+{
+    for (node *tmp = list; tmp != NULL; tmp = tmp->next)
+    {
+        printf("%i -> ", tmp->number);
+    }
+    printf("[END OF THE LIST]\n");
+}
+
+
+void free_list(node *list)
+{
+    node *tmp = NULL;
+
+    while (list != NULL)
+    {
+        tmp = list->next;
+        free(list);
+        list = tmp;
     }
 }
