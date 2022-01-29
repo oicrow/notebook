@@ -21,6 +21,29 @@ int main(void)
     // Create empty list
     node *list = NULL;
 
+    add_node(list, 2);
+    add_node(list, 2);
+    add_node(list, 5);
+    add_node(list, 5);
+    add_node(list, 5);
+    add_node(list, 7);
+    add_node(list, 8);
+    add_node(list, 8);
+
+    print_list(list);
+
+    del_node(list, 2);
+    del_node(list, 2);
+    del_node(list, 4);
+    del_node(list, 5);
+    del_node(list, 5);
+    del_node(list, 8);
+    del_node(list, 8);
+
+    print_list(list);
+
+    free_list(list);
+    printf(list);
 }
 
 node *search_node(node *list, int value)
@@ -92,9 +115,49 @@ void del_node(node *list, int value)
         return;
     }
 
-    // Searching for the value,
-    node *tmp = list;
-    // FIXME
+    // If value is greater than the first node,
+    if(list->number < value)
+    {
+        // tmp points at the node right before the value
+        node *tmp = list;
+        while (tmp->next->number < value)
+        {
+            tmp = tmp->next;
+            if(tmp->next == NULL)
+            {
+                printf("%i is not in the list.\n", value);
+                return;
+            }
+        }
+        
+        // node next to tmp must be equal to value if it exists
+        // so if it's not equal, the value is not in the list
+        if (tmp->next->number != value)
+        {
+            printf("%i is not in the list.\n", value);
+            return;
+        }
+
+        // else, delete the node after tmp (= value)
+        node *n = tmp->next;
+        tmp->next = n->next;
+        free(n);
+    }
+    // If value is the first node, delete the first node.
+    else if(list->number == value)
+    {
+        node *n = list;
+        list = n->next;
+        free(n);
+    }
+    // If value is less than the first node, return.
+    else
+    {
+        prtinf("%i is not in the list.\n", value);
+        return;
+    }
+
+    return;
 }
 
 void print_list(node *list)
