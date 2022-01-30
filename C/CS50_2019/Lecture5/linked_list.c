@@ -87,14 +87,14 @@ node *search_node(node *list, int value)
     {
         if(tmp->number == value)
         {
-            printf("\t%i founded in the %i'th node.\n", value, i);
+            printf("  %i founded in the %i'th node.\n", value, i);
             return tmp;
         }
         tmp = tmp->next;
         i++;
     }
 
-    printf("\t%i is not in the list.\n", value);
+    printf("  %i is not in the list.\n", value);
     return NULL;
 }
 
