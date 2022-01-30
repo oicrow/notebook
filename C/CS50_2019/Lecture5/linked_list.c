@@ -1,5 +1,6 @@
 // Sorted linked list functions
 
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>     // malloc, free
 
@@ -18,88 +19,63 @@ void del_node(node **list_ptr, int value);
 
 int main(void)
 {
-    // int mode, input_num;   // mode number, input number to add/delete/search
-    // node *list = NULL;  // empty list
-
-    // printf("---------------\n");
-    // printf("1 Add value\n");
-    // printf("2 Delete value\n");
-    // printf("3 Search value\n");
-    // printf("4 Print list\n");
-    // printf("0 Quit\n");
-    // printf("---------------\n");
-    // printf("Type the mode number: ");
-    // scanf("%d", &mode);
-    // while (mode < 0 || mode > 4)
-    // {
-    //     printf("Invalid mode number\n");
-    //     printf("Type the mode number: ");
-    //     scanf("%d", &mode);
-    // }
-
-    // switch (mode){
-    //     case 1: // Add value
-    //         printf("Integer to add: ");
-    //         scanf("%d", input_num);
-    //         add_node(&list, input_num);
-    //         break;
-        
-    //     case 2: // Delete value
-    //         printf("Integer to delete: ");
-    //         scanf("%d", input_num);
-    //         del_node(&list, input_num);
-    //         break;
-        
-    //     case 3: // Search value
-    //         printf("Integer to search: ");
-    //         scanf("%d", input_num);
-    //         search_node(list, input_num);
-    //         break;
-        
-    //     case 4: // Print list
-    //         break;
-        
-    //     case 0: // Quit
-    //         free_list(&list);
-    //         printf("Quit program\n");
-    //         break;
-        
-    //     default:
-    //         printf("Error: Invalid mode number\n")
-    // }
-    
+    int mode = 1, input_num;   // mode number, input number to add/delete/search
     node *list = NULL;  // empty list
+    
+    while (mode != 0)
+    {
+        printf("---------------\n");
+        printf("1 Add value\n");
+        printf("2 Delete value\n");
+        printf("3 Search value\n");
+        printf("4 Print list\n");
+        printf("0 Quit\n");
+        printf("---------------\n");
+        printf("Type the mode number: ");
+        scanf("%d", &mode);
 
-    add_node(&list, 2);
-    add_node(&list, 2);
-    add_node(&list, 5);
-    add_node(&list, 5);
-    add_node(&list, 5);
-    add_node(&list, 7);
-    add_node(&list, 8);
-    add_node(&list, 8);
+        while (mode < 0 || mode > 4)
+        {
+            printf("Invalid mode number.\n");
+            printf("Type the mode number: ");
+            scanf("%d", &mode);
+        }
 
-    print_list(list);
-
-    search_node(list, 1);
-    search_node(list, 2);
-    search_node(list, 3);
-    search_node(list, 5);
-    search_node(list, 8);
-    search_node(list, 10);
-
-    del_node(&list, 2);
-    del_node(&list, 2);
-    del_node(&list, 4);
-    del_node(&list, 5);
-    del_node(&list, 5);
-    del_node(&list, 8);
-    del_node(&list, 8);
-
-    print_list(list);
+        switch (mode){
+            case 1: // Add value
+                printf("Integer to add: ");
+                scanf("%d", &input_num);
+                add_node(&list, input_num);
+                print_list(list);
+                break;
+            
+            case 2: // Delete value
+                printf("Integer to delete: ");
+                scanf("%d", &input_num);
+                del_node(&list, input_num);
+                print_list(list);
+                break;
+            
+            case 3: // Search value
+                printf("Integer to search: ");
+                scanf("%d", &input_num);
+                search_node(list, input_num);
+                break;
+            
+            case 4: // Print list
+                print_list(list);
+                break;
+            
+            case 0: // Quit
+                break;
+            
+            default:
+                printf("Error: Invalid mode number.\n");
+        }
+    }
 
     free_list(&list);
-    print_list(list);
+    printf("Quit program.\n");
 }
 
 node *search_node(node *list, int value)
@@ -111,13 +87,14 @@ node *search_node(node *list, int value)
     {
         if(tmp->number == value)
         {
-            printf("%i founded\n", value);
+            printf("\t%i founded in the %i'th node.\n", value, i);
             return tmp;
         }
         tmp = tmp->next;
+        i++;
     }
 
-    printf("%i is not in the list.\n", value);
+    printf("\t%i is not in the list.\n", value);
     return NULL;
 }
 
@@ -162,10 +139,12 @@ void add_node(node **list_ptr, int value)
     if (list == NULL)
     {
         *list_ptr = n;
+        printf("Added %i.\n", value);
         return;
     }
 
-    // Let tmp point at the node right before where new node will be (except for inserting at the first)
+    // Let tmp point at the node right before where new node will be
+    // (except for inserting at the first)
     node *tmp = list;
     while (tmp->next != NULL && tmp->next->number < n->number)
     {
@@ -185,7 +164,6 @@ void add_node(node **list_ptr, int value)
     }
 
     printf("Added %i.\n", value);
-    print_list(*list_ptr);
     return;
 }
 
@@ -196,7 +174,7 @@ void del_node(node **list_ptr, int value)
     // If list is empty, return.
     if (list == NULL)
     {
-        printf("List is already empty\n");
+        printf("List is already empty.\n");
         return;
     }
 
@@ -238,6 +216,5 @@ void del_node(node **list_ptr, int value)
     }
 
     printf("Deleted %i.\n", value);
-    print_list(*list_ptr);
     return;
 }
