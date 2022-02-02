@@ -18,11 +18,37 @@ typedef struct node
 
 int hash_function(char *name);
 void add_hash_table(node *hash_table[], char *name);
+void free_list(node *list);
+void free_tree(node *hash_table[]);
 
 int main (void)
 {
     node *hash_table[26];
 
+    for (int i = 0; i < 26; i++)
+    {
+        hash_table[i] = NULL;
+    }
+
+    add_hash_table(hash_table, "Albus");
+    add_hash_table(hash_table, "Zacharias");
+    add_hash_table(hash_table, "Hermione");
+    add_hash_table(hash_table, "Ginny");
+    add_hash_table(hash_table, "Ron");
+    add_hash_table(hash_table, "Fred");
+    add_hash_table(hash_table, "Severus");
+    add_hash_table(hash_table, "Petunia");
+    add_hash_table(hash_table, "Draco");
+    add_hash_table(hash_table, "James");
+    add_hash_table(hash_table, "Harry");
+    add_hash_table(hash_table, "Hagrid");
+    add_hash_table(hash_table, "Sirius");
+    add_hash_table(hash_table, "Remus");
+    add_hash_table(hash_table, "George");
+    add_hash_table(hash_table, "Lily");
+    add_hash_table(hash_table, "Lucius");
+
+    free_tree(hash_table);
 }
 
 int hash_function(char *name)
@@ -32,7 +58,7 @@ int hash_function(char *name)
     {
         first_letter_int -= 32;
     }
-    return first_letter_int;
+    return first_letter_int - 65;
 }
 
 void add_hash_table(node *hash_table[], char *name)
@@ -48,12 +74,13 @@ void add_hash_table(node *hash_table[], char *name)
     n->next = NULL;
 
     // Find the hash
-    node *list = hash_table[hash_function(name)];
+    int index = hash_function(name);
+    node *list = hash_table[index];
 
     // Link it to the hash table
     if (list == NULL)   // if list is empty,
     {
-        list = n;       // add to the first
+        hash_table[index] = n;       // add to the first
         return;
     }
 
@@ -66,12 +93,34 @@ void add_hash_table(node *hash_table[], char *name)
     if (tmp->name > n->name) // if new node should be the first,
     {
         n->next = tmp;       // link at the first
-        list = n;
+        hash_table[index] = n;
     }
     else                    // else, link the node after tmp
     {
         n->next = tmp->next;
         tmp->next = n;
+    }
+
+    return;
+}
+
+void free_list(node *list)
+{
+    node *tmp = NULL;
+
+    while (list != NULL)
+    {
+        tmp = list->next;
+        free(list);
+        list = tmp;
+    }
+}
+
+void free_tree(node *hash_table[])
+{
+    for (int i = 0; i < 26; i++)
+    {
+        free_list(hash_table[i]);
     }
 
     return;
