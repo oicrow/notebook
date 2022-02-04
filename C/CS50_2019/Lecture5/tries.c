@@ -102,6 +102,13 @@ int search(trie *head, char *word)
     }
 
     trie *curr = head;
+    int length = strlen(word);
+    int i = 0;
 
-    while ()
+    while (curr->character[char_to_index(word[i])] != NULL)
+    {
+        curr = curr->character[char_to_index(word[i])];
+    }
+
+
 }
