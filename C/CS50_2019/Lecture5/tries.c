@@ -17,7 +17,13 @@ typedef struct trie
     struct trie *character[CHAR_SIZE];
 } trie;
 
-///////////////////////////// prototypes of functions here ///////////////////////////////
+int char_to_index(char character);
+int noChild(trie *curr);
+void insert(trie *head, char *word);
+int search(trie *head, char *word);
+void delete(trie *head, char *word);
+void delete_trie(trie **curr, trie **prev);
+
 
 int main(void)
 {
@@ -32,6 +38,42 @@ int main(void)
     {
         head->character[i] = NULL;
     }
+
+    // Test if delete all well
+    insert(head, "abc");
+    delete(head, "abc");
+
+    // insert words
+    insert(head, "cookie");
+    insert(head, "cheese");
+    insert(head, "chocolate");
+    insert(head, "butter");
+    insert(head, "greentea");
+    insert(head, "tart");
+    insert(head, "pie");
+
+    // search words
+    search(head, "cookie");     // O
+    search(head, "cookies");    // X 
+    search(head, "cheese");     // O
+    search(head, "cheesy");     // X
+    search(head, "chocolate");  // O
+    search(head, "blueberry");  // X
+    search(head, "pancake");    // X
+
+    // delete words
+    delete(head, "cookie");     // O
+    delete(head, "cheesepool"); // X is already not in the trie.
+    delete(head, "piepie");     // X is already not in the trie.
+    delete(head, "choco");      // X is already not in the trie.
+    delete(head, "green");      // X is already not in the tire.
+    delete(head, "tart");       // O
+    delete(head, "tart");       // X
+
+    // delete all
+    delete_trie(&head, NULL);
+
+    return;
 }
 
 // Function to convert a char to index of trie's character (array)
@@ -45,21 +87,6 @@ int char_to_index(char character)
     }
 
     return (int) character - 65;
-}
-
-// Function to convert a index of trie's character (array) to a char
-//  : returns - a corresponding small letter
-//  :         - '\0', if invalid index
-char index_to_char(int i)
-{
-    // Ensure it's a valid index
-    if (i >= 0 && i < CHAR_SIZE)
-    {
-        printf("Invalid index.\n");
-        return '\0';
-    }
-
-    return (char) i + 97;
 }
 
 // Function to check if the trie does not have any child trie
@@ -89,6 +116,12 @@ void insert(trie *head, char *word)
     if (head == NULL)
     {
         printf("Invalid trie.\n");
+        return;
+    }
+    // Ensure word is not blank
+    if (word == "")
+    {
+        printf("Word is blank.\n");
         return;
     }
 
@@ -134,7 +167,13 @@ int search(trie *head, char *word)
     // Return 0 if trie is empty
     if (head == NULL)
     {
-        printf("The trie is empty.\n", word);
+        printf("The trie is empty.\n");
+        return 0;
+    }
+    // Return 0 if word is blank
+    if (word == "")
+    {
+        printf("Word is blank.\n");
         return 0;
     }
 
@@ -185,79 +224,94 @@ void delete(trie *head, char *word)
         return;
     }
 
+    // Move curr to the last trie of the word, prev to the trie right before curr
     trie *curr = head;
     trie *prev = head;
     int i = 0;
-    while (word[i])
+    while (word[i]) // Repeat for every letter, until the end of the word
     {
+        // If there's no path in the middle, return
         if (curr->character[char_to_index(word[i])] == NULL)
         {
             printf("%s is already not in the trie.\n", word);
             return;
         }
 
+        // Move curr and prev one trie below respectively
         curr = curr->character[char_to_index(word[i])];
-        if (i != 0)
+        if (i != 0) // (don't move prev for the first recurrence)
         {
             prev = prev->character[char_to_index(word[i - 1])];
         }
+
+        // Move to next letter of word
         i++;
     }
 
-    if (curr->isLeaf == 0)
+    // If path exists but it doesn't end there, return
+    if (curr->isLeaf == 0)  // (because word does not exsist then)
     {
         printf("%s is already not in the trie.\n", word);
         return;
     }
 
+    // Mark curr is not leaf, so that the word is deleted
     curr->isLeaf = 0;
 
+    // Free curr, if it is not necessary because it represents no word
+    // Recur it to clean up the tries above
+    // (if parent trie has no other child and not leaf, delete the parent too)
     int length = i;
     i = 1;
     while (noChild(curr) && curr->isLeaf == 0)
     {
+        // Unlink curr and prev
         prev->character[char_to_index(word[length - i])] = NULL;
 
-        trie *tmp = curr;
-        curr = head;
-        prev = head;
-        int j = 0;
-        while (word[j])
+        // Move curr and tmp one trie above respectively
+        trie *tmp = curr;   // temporarily represents the former curr
+        curr = head;        // initialize curr to head
+        prev = head;        // initialize curr to head
+        int j = 0;          // int j to recur for every letter of word
+        while (word[j]) // Recur for every letter, until the end of word
         {
+            // Move curr and prev one trie below respectively
             curr = curr->character[char_to_index(word[j])];
-            if (j != 0)
+            if (j != 0) // (don't move prev for the first recurrence)
             {
                 prev  = prev->character[char_to_index(word[j - 1])];
             }
             
+            // Stop moving curr and prev, if next curr will be tmp (original curr)
             if (curr->character[char_to_index(word[j + 1])] == tmp)
             {
                 break;
             }
-            else if (curr == tmp)
+            // Stop moving curr and prev, if curr == tmp
+            else if (curr == tmp)   // (because prev is head, curr and tmp is second trie)
             {
-                if (noChild(curr) && curr->isLeaf == 0)
-                {
-                    prev->character[char_to_index(word[0])] = NULL;
-                    free(curr);
-                    return;
-                }
-                else
-                {
-                    return;
-                }
+                break;
             }
-
+            
+            // Move to next letter of word
             j++;
         }
-        free(tmp);
 
+        // Then delete tmp (original curr)
+        free(tmp);
+        if (curr == tmp) // If it's the second trie, unlink and return
+        {
+            prev->character[0] = NULL;
+            return;
+        }
+
+        // Move to next letter of word
         i++;
     }
 }
 
 // Function to delete and free entire trie
-void delete_trie(trie **curr, trie **prev = NULL)
+void delete_trie(trie **curr, trie **prev)
 {
     // Ensure trie is not empty
     if (prev == NULL && *curr == NULL)
@@ -272,16 +326,16 @@ void delete_trie(trie **curr, trie **prev = NULL)
     // Delete all child tries below (Recur)
     for (int i = 0; i < CHAR_SIZE; i++)
     {
-        if ((*curr)->charcter[i] != NULL)   // (if exists)
+        if ((*curr)->character[i] != NULL)   // (if exists)
         {
-            delete_trie(&((*curr)->charcter[i]), prev);
+            delete_trie(&((*curr)->character[i]), prev);
         }
     }
 
     if (prev != NULL)   // If it's not the first call (if it's recursively called)
     {
         // Find corresponding i that satisfies prev->character[i] == curr
-        i = 0;
+        int i = 0;
         while ((*prev)->character[i] != (*curr))
         {
             i++;
