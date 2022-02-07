@@ -24,7 +24,6 @@ int search(trie *head, char *word);
 void delete(trie *head, char *word);
 void delete_trie(trie **curr, trie **prev);
 
-
 int main(void)
 {
     // Make head node
@@ -283,7 +282,7 @@ void delete(trie *head, char *word)
             }
             
             // Stop moving curr and prev, if next curr will be tmp (original curr)
-            if (word[j + 1] && curr->character[char_to_index(word[j + 1])] == tmp)
+            if (word[j + 1] && (curr->character[char_to_index(word[j + 1])] == tmp))
             {
                 break;
             }
@@ -298,12 +297,12 @@ void delete(trie *head, char *word)
         }
 
         // Then delete tmp (original curr)
-        free(tmp);
         if (curr == tmp) // If it's the second trie, unlink and return
         {
             prev->character[0] = NULL;
             return;
         }
+        free(tmp);
 
         // Move to next letter of word
         i++;
