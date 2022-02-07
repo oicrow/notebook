@@ -283,7 +283,7 @@ void delete(trie *head, char *word)
             }
             
             // Stop moving curr and prev, if next curr will be tmp (original curr)
-            if (curr->character[char_to_index(word[j + 1])] == tmp)
+            if (word[j + 1] && curr->character[char_to_index(word[j + 1])] == tmp)
             {
                 break;
             }
