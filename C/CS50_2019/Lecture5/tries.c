@@ -258,57 +258,47 @@ void delete(trie *head, char *word)
     curr->isLeaf = 0;
 
     // Free curr, if it is not necessary because it represents no word
-    // Recur it to clean up the tries above
+    // Recur to clean up the tries above
     // (if parent trie has no other child and not leaf, delete the parent too)
-    int length = i;
-    i = 1;
     while (noChild(curr) && curr->isLeaf == 0)
     {
-        // Unlink curr and prev
-        prev->character[char_to_index(word[length - i])] = NULL;
-
-        // Move curr and tmp one trie above respectively
-        trie *tmp = curr;   // temporarily represents the former curr
-        curr = head;        // initialize curr to head
-        prev = head;        // initialize curr to head
+        // Move curr and prev one trie above respectively
+        // prev->curr, tmp:idle  --->  prev->curr(original prev)->tmp(original curr)
         int j = 0;          // int j to recur for every letter of word
-        while (word[j]) // Recur for every letter, until the end of word
-        {
+        trie *tmp = curr;   // temporarily represents the former curr
+        curr = head;        // Initialize curr to head
+        prev = head;        // Initialize prev to head
+        while (word[j] && (curr->character[char_to_index(word[j])] != tmp))
+        {   // Recur until curr points at the trie right before tmp
             // Move curr and prev one trie below respectively
             curr = curr->character[char_to_index(word[j])];
             if (j != 0) // (don't move prev for the first recurrence)
             {
                 prev  = prev->character[char_to_index(word[j - 1])];
             }
-            
-            // Stop moving curr and prev, if next curr will be tmp (original curr)
-            if (word[j + 1] && (curr->character[char_to_index(word[j + 1])] == tmp))
-            {
-                break;
-            }
-            // Stop moving curr and prev, if curr == tmp
-            else if (curr == tmp)   // (because prev is head, curr and tmp is second trie)
-            {
-                break;
-            }
-            
+
             // Move to next letter of word
             j++;
         }
 
+        // Unlink tmp and curr, which were originally prev and curr before moving
+        curr->character[char_to_index(word[j])] = NULL;
+
         // Then delete tmp (original curr)
-        if (curr == tmp) // If it's the second trie, unlink and return
-        {
-            prev->character[0] = NULL;
-            return;
-        }
         free(tmp);
 
+        // If curr == head, that is, there's no trie to free any more, return
+        if (curr == head)
+        {
+            return;
+        }
+        
         // Move to next letter of word
         i++;
     }
 }
 
+// BUGGY FIXME
 // Function to delete and free entire trie
 void delete_trie(trie **curr, trie **prev)
 {
