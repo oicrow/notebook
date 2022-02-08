@@ -298,37 +298,34 @@ void delete(trie *head, char *word)
     }
 }
 
-// BUGGY FIXME
 // Function to delete and free entire trie
 void delete_trie(trie **curr, trie **prev)
 {
-    // Ensure trie is not empty
-    if (prev == NULL && *curr == NULL)
+    // Ensure trie is not empty (only when the first call by user)
+    if ((prev == NULL) && (*curr == NULL))
     {
         printf("The trie doesn't exsist.\n");
         return;
     }
-
-    // update previous trie
-    prev = curr;
 
     // Delete all child tries below (Recur)
     for (int i = 0; i < CHAR_SIZE; i++)
     {
         if ((*curr)->character[i] != NULL)   // (if exists)
         {
-            delete_trie(&((*curr)->character[i]), prev);
+            delete_trie(&((*curr)->character[i]), curr);
         }
     }
 
     if (prev != NULL)   // If it's not the first call (if it's recursively called)
     {
-        // Find corresponding i that satisfies prev->character[i] == curr
+        // Find corresponding i that satisfies (*prev)->character[i] == (*curr)
         int i = 0;
         while ((*prev)->character[i] != (*curr))
         {
             i++;
         }
+
         // Unlink them
         (*prev)->character[i] = NULL;
     }
