@@ -5,8 +5,26 @@ void passArrayInt(int arr[]);
 void passArrayStr(char *arr[]);
 void passArrayInt_p(int *arr);
 void passArrayStr_p(char **arr);
-int *returnArrayInt(void);
-char **returnArrayStr(void);
+int *getArrayInt_i(int arr[]);
+char **getArrayStr_i(char *arr[]);
+int *getArrayInt_m(void);
+char **getArratStr_m(void);
+int *getArrayInt_s(void);
+char **getArrayStr_s(void);
+struct_array_int *getArrayInt_t(void);
+struct_array_str *getArrayStr_t(void);
+
+typedef struct
+{
+    int arr[3];
+}
+struct_array_int;
+
+typedef struct
+{
+    char *arr[3];
+}
+struct_array_str;
 
 int main(void)
 {
@@ -86,9 +104,10 @@ void passArrayStr_p(char **arr)
 
 // 1. Use input array
 // Function with input argument of array of int (to use for output value)
-//               output value of pointer to array of int
+//               output value of pointer to int as an array
 int *getArrayInt_i(int arr[]) // or array of int as a pointer -- int *arr
 {
+    // Modify values of array
     arr[0] = 0;
     arr[1] = 0;
     arr[2] = 0;
@@ -96,23 +115,112 @@ int *getArrayInt_i(int arr[]) // or array of int as a pointer -- int *arr
     return arr;
 }
 
-// 2. Use dynamically allocated memory(malloc)
-// Function with output value of pointer to array of int
-int *getArrayInt_p(void)
+// Function with input argument of array of pointer to char (to use for output value)
+//               output value of pointer to pointer to char as an array
+char **getArrayStr_i(char *arr[])  // or array of pointer to char as a pointer -- char **arr
 {
-    int result[3] = malloc(sizeof(int) * 3);
+    // Modify values of array
+    arr[0] = "aaa";
+    arr[1] = "bbb";
+    arr[2] = "ccc";
+
+    return arr;
+}
+
+// 2. Use dynamically allocated memory(malloc)
+// Mallocated memory is stored in heap, so it doesn't disappear after the function call ended
+// Function with output value of pointer to int as an array
+int *getArrayInt_m(void)
+{
+    // Allocate memory for array of 3 int
+    int *result = malloc(sizeof(int) * 3);
+    if (result == NULL)
+    {
+        return NULL;
+    }
+
+    // Initialize values of array
     result[0] = 0;
     result[1] = 0;
     result[2] = 0;
+
     return result;
 }
 
-// Function with output value of pointer to array of pointers to char
-char **returnArrayStr(void)
+// Function with output value of pointer to pointers to char as an array
+char **getArratStr_m(void)
 {
-    char *result[3] = malloc(sizeof(char) * 12);
+    // Allocated memory for array of 3 pointer to char
+    char **result = malloc(sizeof(char *) * 3);
+    if (result == NULL)
+    {
+        return NULL;
+    }
+
+    // Initialize values of array
     result[0] = "aaa";
     result[1] = "bbb";
     result[2] = "ccc";
+
+    return result;
+}
+
+// 3. Use static variable
+// Static variable does not disappear even after the function call ended
+// Function with output value of pointer to array of int
+int *getArrayInt_s(void)
+{
+    // Declare static array of int
+    static int arr[3];
+
+    // Initialize values of array
+    arr[0] = 0;
+    arr[1] = 0;
+    arr[2] = 0;
+
+    return arr;
+}
+
+// Function with output value of pointer to array of pointer to char
+char **getArrayStr_s(void)
+{
+    // Declare static array of pointer to char
+    static char *arr[3];
+
+    // Initialize values of array
+    arr[0] = "aaa";
+    arr[1] = "bbb";
+    arr[2] = "ccc";
+
+    return arr;
+}
+
+// 4. Use structure
+// This actually works, because it returns contents of sturct_array_int, not pointer to struct_array_int
+// Function with output value of structure including array of int
+struct_array_int *getArrayInt_t(void)
+{
+    // Declare structure including array of int
+    struct_array_int result;
+
+    // Initialize values of array
+    result->arr[0] = 0;
+    result->arr[1] = 0;
+    result->arr[2] = 0;
+
+    return result;
+}
+
+// Function with output value of structure including array of pointer to char
+struct_array_str *getArrayStr_t(void)
+{
+    // Declare structure including array of pointer to char
+    struct_array_str result;
+
+    // Initialize values of array
+    result->arr[0] = "aaa";
+    result->arr[1] = "bbb";
+    result->arr[2] = "ccc";
+
     return result;
 }
