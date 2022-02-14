@@ -9,7 +9,7 @@
 // Node of linked list
 typedef struct node
 {
-    char *
+    char *string;
     struct node *next;
 }
 node;
@@ -32,7 +32,8 @@ int main(void)
 
     // Queue in linked list
 
-    // Initialize linked 
+    // Initialize linked list
+    node *head = NULL;
 }
 
 void enqueue_array(char **arr, char *string)
@@ -99,4 +100,20 @@ void print_array(char **arr)
     }
 }
 
-void enqueue_linked()
+void enqueue_linked(node **head, char *string)
+{
+    // Create a new node with string and next NULL
+    node *n = malloc(sizeof(node));
+    if (n == NULL)
+    {
+        printf("Enqueue failed: cannot execute malloc\n");
+        return;
+    }
+    n->string = string;
+
+    // If list is empty, add the node to the first
+    if (*head == NULL)
+    {
+
+    }
+}
