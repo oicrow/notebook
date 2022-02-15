@@ -66,7 +66,7 @@ void enqueue_array(char **arr, char *string)
 char *dequeue_array(char **arr)
 {
     // Remember first element
-    char *tmp = arr[0];
+    char *string = arr[0];
 
     // Move each element one step forward
     for (int i = 0; i < 9; i++)
@@ -78,10 +78,10 @@ char *dequeue_array(char **arr)
     arr[i] = NULL;
 
     // Prompt user that dequeue successed
-    printf("Successfully dequeued \"%s\".\n", tmp);
+    printf("Successfully dequeued \"%s\".\n", string);
 
     // Return first element 
-    return tmp;
+    return string;
 }
 
 void print_array(char **arr)
@@ -100,7 +100,7 @@ void print_array(char **arr)
     }
 }
 
-void enqueue_linked(node **head, char *string)
+void enqueue_linked(node **list, char *string)
 {
     // Create a new node with string and next NULL
     node *n = malloc(sizeof(node));
@@ -110,10 +110,59 @@ void enqueue_linked(node **head, char *string)
         return;
     }
     n->string = string;
+    n->next = NULL;
 
-    // If list is empty, add the node to the first
-    if (*head == NULL)
+    // If list is empty,
+    if (*list == NULL)
     {
-
+        // Add the node to the first
+        *list = n;
     }
+    // If list is not empty,
+    else
+    {
+        // Go to the last node, and
+        node *tmp = *list;
+        while (tmp->next != NULL)
+        {
+            tmp = tmp->next;
+        }
+
+        // Link it after the last node
+        tmp->next = n;
+    }
+
+    // Prompt user that enqueue successed
+    printf("Successfully enqueued \"%s\".\n", string);
+
+    return;
+}
+
+char *dequeue_linked(node **list)
+{
+    // Remember first element
+    char *string = list->string;
+
+    // Move head to second node
+    node *tmp = *list;
+    *list = (*list)->next;
+
+    // Free first node
+    free(*tmp);
+
+    // Prompt user that dequeue succeessed
+    printf("Successfully dequeued \'%s\'\n", string);
+
+    // Return first element
+    return string;
+}
+
+void print_linked(node *list)
+{
+    int i = 0
+    do
+    {
+        printf("#%i: %s\n", i, list->string);
+    }
+    while (list->next != NULL);
 }
