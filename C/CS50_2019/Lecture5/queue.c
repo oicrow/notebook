@@ -92,7 +92,7 @@ void print_array(char **arr)
         if (arr[i] == NULL)
         {
             printf("End of queue.\n");
-            printf("%i elements in queue / %i slots available\n", i, 10 - i);
+            printf("%i element(s) in queue / %i slot(s) available\n", i, 10 - i);
             return;
         }
         // Else print i'th element
@@ -159,10 +159,28 @@ char *dequeue_linked(node **list)
 
 void print_linked(node *list)
 {
-    int i = 0
-    do
+    // Print each element until the end of queue
+    int i = 0;
+    while (list != NULL)
     {
+        // Print element
         printf("#%i: %s\n", i, list->string);
+
+        // Move to the next node
+        list = list->next;
+
+        // Move to the next index
+        i++;
     }
-    while (list->next != NULL);
+
+    // Print message that notifies the end
+    printf("End of queue.\n");
+    printf("%i element(s) in queue\n", i);
+
+    return;
+}
+
+void clear_linked(node **list)
+{
+    
 }
