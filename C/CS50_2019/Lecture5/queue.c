@@ -17,6 +17,10 @@ node;
 void enqueue_array(char **arr, char *string);
 char *dequeue_array(char **arr);
 void print_array(char **arr);
+void enqueue_linked(node **list, char *string);
+char *dequeue_linked(node **list);
+void print_linked(node *list);
+void clear_linked(node **list);
 
 int main(void)
 {
@@ -36,6 +40,7 @@ int main(void)
     node *head = NULL;
 }
 
+// Function to enqueue string to array
 void enqueue_array(char **arr, char *string)
 {
     // Move i to index of the last unempty element of array
@@ -63,6 +68,8 @@ void enqueue_array(char **arr, char *string)
     return;
 }
 
+// Function to dequeue string from array
+//  : return the first element of array (dequeue)
 char *dequeue_array(char **arr)
 {
     // Remember first element
@@ -182,5 +189,18 @@ void print_linked(node *list)
 
 void clear_linked(node **list)
 {
-    
+    // tmp for temporarily store pointer to node
+    node *tmp = NULL;
+
+    // Repeat while list is not empty
+    while ((*list) != NULL)
+    {
+        // Update tmp to list
+        tmp = *list;
+        // Update list to the next node
+        *list = (*list)->next;
+
+        // Delete tmp
+        free(tmp);
+    }
 }
