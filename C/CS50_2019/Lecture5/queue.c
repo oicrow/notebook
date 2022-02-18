@@ -69,7 +69,7 @@ void enqueue_array(char **arr, char *string)
 }
 
 // Function to dequeue string from array
-//  : return the first element of array (dequeue)
+//  : return the first element of array (dequeue )
 char *dequeue_array(char **arr)
 {
     // Remember first element
