@@ -17,6 +17,7 @@ node;
 void enqueue_array(char **arr, char *string);
 char *dequeue_array(char **arr);
 void print_array(char **arr);
+void clear_array(char **arr);
 void enqueue_linked(node **list, char *string);
 char *dequeue_linked(node **list);
 void print_linked(node *list);
@@ -33,6 +34,9 @@ int main(void)
         array[i] = NULL;
     }
 
+    enqueue_array(array, "cookie");
+    enqueue_array(array, "butter cookie");
+
 
     // Queue in linked list
 
@@ -44,7 +48,8 @@ int main(void)
 void enqueue_array(char **arr, char *string)
 {
     // Move i to index of the last unempty element of array
-    for (int i = 0; i < 10; i++)
+    int i;
+    for (i = 0; i < 10; i++)
     {
         if (arr[i] == NULL)
         {
@@ -69,14 +74,15 @@ void enqueue_array(char **arr, char *string)
 }
 
 // Function to dequeue string from array
-//  : return the first element of array (dequeue )
+//  : return the first element of array (dequeued string)
 char *dequeue_array(char **arr)
 {
     // Remember first element
     char *string = arr[0];
 
     // Move each element one step forward
-    for (int i = 0; i < 9; i++)
+    int i;
+    for (i = 0; i < 9; i++)
     {
         arr[i] = arr[i + 1];
     }
@@ -91,8 +97,10 @@ char *dequeue_array(char **arr)
     return string;
 }
 
+// Function to print all elements in array
 void print_array(char **arr)
 {
+    // Repeat for every element in array
     for (int i = 0; i < 10; i++)
     {
         // If there's no element backward, print message and return
@@ -107,6 +115,23 @@ void print_array(char **arr)
     }
 }
 
+// Function to clear all elements in array
+void clear_array(char **arr)
+{
+    // Repeat for every element in array
+    for (int i = 0; i < 10; i++)
+    {
+        // If there's no element backward, return
+        if (arr[i] == NULL)
+        {
+            return;
+        }
+        // Else delete value of element and initialize it to NULL
+        arr[i] = NULL;
+    }
+}
+
+// Function to enqueue string to linked list
 void enqueue_linked(node **list, char *string)
 {
     // Create a new node with string and next NULL
@@ -145,17 +170,19 @@ void enqueue_linked(node **list, char *string)
     return;
 }
 
+// Function to dequeue string from linked list
+//  : return the first element of linked list (dequeued string)
 char *dequeue_linked(node **list)
 {
     // Remember first element
-    char *string = list->string;
+    char *string = (*list)->string;
 
     // Move head to second node
     node *tmp = *list;
     *list = (*list)->next;
 
     // Free first node
-    free(*tmp);
+    free(tmp);
 
     // Prompt user that dequeue succeessed
     printf("Successfully dequeued \'%s\'\n", string);
@@ -164,6 +191,7 @@ char *dequeue_linked(node **list)
     return string;
 }
 
+// Function to print all elements in linked list
 void print_linked(node *list)
 {
     // Print each element until the end of queue
@@ -187,6 +215,7 @@ void print_linked(node *list)
     return;
 }
 
+// Function to clear and free all elements in linked list
 void clear_linked(node **list)
 {
     // tmp for temporarily store pointer to node
