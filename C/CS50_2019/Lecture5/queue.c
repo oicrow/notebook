@@ -34,8 +34,76 @@ int main(void)
         array[i] = NULL;
     }
 
-    enqueue_array(array, "cookie");
-    enqueue_array(array, "butter cookie");
+    enqueue_array(array, "cookie");             // cookie
+    enqueue_array(array, "choloate");           // cookie, chocolate
+    enqueue_array(array, "lemon");              // cookie, chocolate, lemon
+    enqueue_array(array, "cheese");             // cookie, chocolate, lemon, cheese
+    enqueue_array(array, "butter");             // cookie, chocolate, lemon, cheese, butter  
+    enqueue_array(array, "macadamia");          // cookie, chocolate, lemon, cheese, butter, macadamia
+    enqueue_array(array, "matcha");             // cookie, chocolate, lemon, cheese, butter, macadamia, matcha
+    enqueue_array(array, "almonde");            // cookie, chocolate, lemon, cheese, butter, macadamia, matcha, almonde
+    enqueue_array(array, "earl grey");          // cookie, chocolate, lemon, cheese, butter, macadamia, matcha, almonde, earl grey
+    enqueue_array(array, "peanut");             // cookie, chocolate, lemon, cheese, butter, macadamia, matcha, almonde, earl grey, peanut
+    enqueue_array(array, "coconut");            // Queue is already full.
+
+    print_array(array);                         // cookie, chocolate, lemon, cheese, butter, macadamia, matcha, almonde, earl grey, peanut
+
+    char *tmp = dequeue_array(array);           // chocolate, lemon, cheese, butter, macadamia, matcha, almonde, earl grey, peanut
+    printf("I need %s.\n", tmp);                // I need cookie.
+
+    print_array(array);                         // chocolate, lemon, cheese, butter, macadamia, matcha, almonde, earl grey, peanut
+
+    enqueue_array(array, "coconut");            // chocolate, lemon, cheese, butter, macadamia, matcha, almonde, earl grey, peanut, coconut
+    
+    dequeue_array(array);                       // lemon, cheese, butter, macadamia, matcha, almonde, earl grey, peanut, coconut
+    dequeue_array(array);                       // cheese, butter, macadamia, matcha, almonde, earl grey, peanut, coconut
+    dequeue_array(array);                       // butter, macadamia, matcha, almonde, earl grey, peanut, coconut
+    dequeue_array(array);                       // macadamia, matcha, almonde, earl grey, peanut, coconut
+    
+    print_array(array);                         // macadamia, matcha, almonde, earl grey, peanut, coconut
+    
+    enqueue_array(array, "blueberry");          // macadamia, matcha, almonde, earl grey, peanut, coconut, blueberry
+    
+    print_array(array, "blueberry");            // macadamia, matcha, almonde, earl grey, peanut, coconut, blueberry
+    
+    dequeue_array(array);                       // matcha, almonde, earl grey, peanut, coconut, blueberry
+    dequeue_array(array);                       // almonde, earl grey, peanut, coconut, blueberry
+    dequeue_array(array);                       // earl grey, peanut, coconut, blueberry
+    
+    print_array(array);                         // earl grey, peanut, coconut, blueberry
+   
+    dequeue_array(array);                       // peanut, coconut, blueberry
+    dequeue_array(array);                       // coconut, blueberry
+    dequeue_array(array);                       // blueberry
+    
+    print_array(array);                         // blueberry
+    
+    dequeue_array(array);                       // 
+    
+    print_array(array);                         //
+
+    dequeue_array(array);                       // Queue is already empty.
+    
+    enqueue_array(array, "cookie");             // cookie
+    enqueue_array(array, "choloate");           // cookie, chocolate
+    enqueue_array(array, "lemon");              // cookie, chocolate, lemon
+    enqueue_array(array, "cheese");             // cookie, chocolate, lemon, cheese
+    enqueue_array(array, "butter");             // cookie, chocolate, lemon, cheese, butter  
+    enqueue_array(array, "macadamia");          // cookie, chocolate, lemon, cheese, butter, macadamia
+    enqueue_array(array, "matcha");             // cookie, chocolate, lemon, cheese, butter, macadamia, matcha
+    enqueue_array(array, "almonde");            // cookie, chocolate, lemon, cheese, butter, macadamia, matcha, almonde
+    enqueue_array(array, "earl grey");          // cookie, chocolate, lemon, cheese, butter, macadamia, matcha, almonde, earl grey
+    enqueue_array(array, "peanut");             // cookie, chocolate, lemon, cheese, butter, macadamia, matcha, almonde, earl grey, peanut
+
+    clear_array(array);                         //
+
+    print_array(array);                         //
+
+    dequeue_array(array);                       // Queue is already empty.
+
+    enqueue_array(array, "cookie");             // cookie
+    
+    clear_array(array);                         //
 
 
     // Queue in linked list
@@ -77,6 +145,13 @@ void enqueue_array(char **arr, char *string)
 //  : return the first element of array (dequeued string)
 char *dequeue_array(char **arr)
 {
+    // If arr is empty, print message and return
+    if (arr[0] == NULL)
+    {
+        printf("Queue is already empty.\n");
+        return NULL;
+    }
+
     // Remember first element
     char *string = arr[0];
 
