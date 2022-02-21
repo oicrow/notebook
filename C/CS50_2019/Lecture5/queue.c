@@ -110,6 +110,8 @@ int main(void)
 
     // Initialize linked list
     node *head = NULL;
+
+    
 }
 
 // Function to enqueue string to array
