@@ -64,7 +64,7 @@ int main(void)
     
     enqueue_array(array, "blueberry");          // macadamia, matcha, almonde, earl grey, peanut, coconut, blueberry
     
-    print_array(array, "blueberry");            // macadamia, matcha, almonde, earl grey, peanut, coconut, blueberry
+    print_array(array);                         // macadamia, matcha, almonde, earl grey, peanut, coconut, blueberry
     
     dequeue_array(array);                       // matcha, almonde, earl grey, peanut, coconut, blueberry
     dequeue_array(array);                       // almonde, earl grey, peanut, coconut, blueberry
@@ -111,7 +111,86 @@ int main(void)
     // Initialize linked list
     node *head = NULL;
 
+    print_linked(head);                         //
+
+    enqueue_linked(&head, "cookie");            // cookie
+
+    print_linked(head);                         // cookie
+
+    enqueue_linked(&head, "chocolate");         // cookie, chocolate
+    enqueue_linked(&head, "lemon");             // cookie, chocolate, lemon
+    enqueue_linked(&head, "cheese");            // cookie, chocolate, lemon, cheese
+    enqueue_linked(&head, "butter");            // cookie, chocolate, lemon, cheese, butter
+    enqueue_linked(&head, "matcha");            // cookie, chocolate, lemon, cheese, butter, matcha
+    enqueue_linked(&head, "earl grey");         // cookie, chocolate, lemon, cheese, butter, matcha, earl grey
+    enqueue_linked(&head, "peanut");            // cookie, chocolate, lemon, cheese, butter, matcha, earl grey, peanut
+
+    print_linked(head);                         // cookie, chocolate, lemon, cheese, butter, matcha, earl grey, peanut
+
+    tmp = dequeue_linked(&head);                // chocolate, lemon, cheese, butter, matcha, earl grey, peanut
+    printf("I need %s.\n", tmp);                // I need cookie.
+
+    print_linked(head);                         // chocolate, lemon, cheese, butter, matcha, earl grey, peanut
+
+    enqueue_linked(&head, "macadamia");         // chocolate, lemon, cheese, butter, matcha, earl grey, peanut, macadamia
+
+    tmp = dequeue_linked(&head);                // lemon, cheese, butter, matcha, earl grey, peanut, macadamia
+    printf("I need %s cookie.\n", tmp);         // I need chocolate cookie.
+
+    tmp = dequeue_linked(&head);                // cheese, butter, matcha, earl grey, peanut, macadamia
+    printf("I need %s cookie.\n", tmp);         // I need lemon cookie.
+
+    print_linked(head);                         // cheese, butter, matcha, earl grey, peanut, macadamia
+
+    dequeue_linked(&head);                      // butter, matcha, earl grey, peanut, macadamia
+    dequeue_linked(&head);                      // matcha, earl grey, peanut, macadamia
+    dequeue_linked(&head);                      // earl grey, peanut, macadamia
+    dequeue_linked(&head);                      // peanut, macadamia
+    dequeue_linked(&head);                      // macadamia
     
+    print_linked(head);                         // macadamia
+
+    dequeue_linked(&head);                      //
+
+    print_linked(head);                         //
+
+    dequeue_linked(&head);                      // Queue is already empty.
+
+    print_linked(head);                         //
+
+    clear_linked(&head);                        //
+
+    print_linked(head);                         //
+    
+    enqueue_linked(&head, "cookie");            // cookie
+    
+    print_linked(head);                         // cookie
+
+    clear_linked(&head);                        // 
+
+    enqueue_linked(&head, "cookie");            // cookie    
+    enqueue_linked(&head, "choloate");          // cookie, chocolate
+    enqueue_linked(&head, "lemon");             // cookie, chocolate, lemon
+    enqueue_linked(&head, "cheese");            // cookie, chocolate, lemon, cheese
+    enqueue_linked(&head, "butter");            // cookie, chocolate, lemon, cheese, butter
+
+    print_linked(head);                         // cookie, chocolate, lemon, cheese, butter
+
+    clear_linked(&head);                        //
+
+    enqueue_linked(&head, "cookie");            // cookie    
+    enqueue_linked(&head, "choloate");          // cookie, chocolate
+    enqueue_linked(&head, "lemon");             // cookie, chocolate, lemon
+    enqueue_linked(&head, "cheese");            // cookie, chocolate, lemon, cheese
+    enqueue_linked(&head, "butter");            // cookie, chocolate, lemon, cheese, butter
+
+    dequeue_linked(&head);                      // chocolate, lemon, cheese, butter
+
+    clear_linked(&head);                        //
+
+    dequeue_linked(&head);                      // Queue is already empty.
+
+    print_linked(head);                         //
 }
 
 // Function to enqueue string to array
@@ -251,6 +330,13 @@ void enqueue_linked(node **list, char *string)
 //  : return the first element of linked list (dequeued string)
 char *dequeue_linked(node **list)
 {
+    // If list is empty, print message and return
+    if ((*list) == NULL)
+    {
+        printf("Queue is already empty.\n");
+        return NULL;
+    }
+
     // Remember first element
     char *string = (*list)->string;
 
