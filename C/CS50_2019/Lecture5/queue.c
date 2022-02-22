@@ -257,18 +257,22 @@ char *dequeue_array(char **arr)
 void print_array(char **arr)
 {
     // Repeat for every element in array
-    for (int i = 0; i < 10; i++)
+    int i;
+    for (i = 0; i < 10; i++)
     {
-        // If there's no element backward, print message and return
+        // If there's no element backward, get out of loop
         if (arr[i] == NULL)
         {
-            printf("End of queue.\n");
-            printf("%i element(s) in queue / %i slot(s) available\n", i, 10 - i);
-            return;
+            break;
         }
         // Else print i'th element
         printf("#%i: %s\n", i, arr[i]);
     }
+
+    // Print message and return
+    printf("End of queue.\n");
+    printf("%i element(s) in queue / %i slot(s) available\n", i, 10 - i);
+    return;
 }
 
 // Function to clear all elements in array
