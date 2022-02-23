@@ -276,6 +276,7 @@ void print_array(char **arr)
 }
 
 // Function to clear all elements in array
+// (same with stack)
 void clear_array(char **arr)
 {
     // Repeat for every element in array
