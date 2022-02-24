@@ -194,9 +194,10 @@ int main(void)
 }
 
 // Function to enqueue string to array
+// (same with stack)
 void enqueue_array(char **arr, char *string)
 {
-    // Move i to index of the last unempty element of array
+    // Move i to index of the first empty element of queue
     int i;
     for (i = 0; i < 10; i++)
     {
@@ -254,6 +255,7 @@ char *dequeue_array(char **arr)
 }
 
 // Function to print all elements in array
+// (same with stack)
 void print_array(char **arr)
 {
     // Repeat for every element in array
@@ -270,7 +272,7 @@ void print_array(char **arr)
     }
 
     // Print message and return
-    printf("End of queue.\n");
+    printf("--- End of queue ---\n");
     printf("%i element(s) in queue / %i slot(s) available\n", i, 10 - i);
     return;
 }
@@ -377,7 +379,7 @@ void print_linked(node *list)
     }
 
     // Print message that notifies the end
-    printf("End of queue.\n");
+    printf("--- End of queue ---\n");
     printf("%i element(s) in queue\n", i);
 
     return;
