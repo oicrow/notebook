@@ -244,7 +244,7 @@ char *dequeue_array(char **arr)
         arr[i] = arr[i + 1];
     }
 
-    // Initialize last node to NULL
+    // Initialize last element to NULL
     arr[i] = NULL;
 
     // Prompt user that dequeue successed
@@ -295,6 +295,7 @@ void clear_array(char **arr)
 }
 
 // Function to enqueue string to linked list
+// (same with stack)
 void enqueue_linked(node **list, char *string)
 {
     // Create a new node with string and next NULL
@@ -362,6 +363,7 @@ char *dequeue_linked(node **list)
 }
 
 // Function to print all elements in linked list
+// (same with stack)
 void print_linked(node *list)
 {
     // Print each element until the end of queue
@@ -386,6 +388,7 @@ void print_linked(node *list)
 }
 
 // Function to clear and free all elements in linked list
+// (same with stack)
 void clear_linked(node **list)
 {
     // tmp for temporarily store pointer to node
