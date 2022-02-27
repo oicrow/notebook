@@ -8,7 +8,7 @@
 
 typedef struct Entry
 {
-     *key;
+    *key;
     char *value;
 } Entry;
 
