@@ -4,17 +4,18 @@
 //  : also available in python
 
 //        Wed 
-//       ↙  ↘
+//      ↙   ↘
 //    Mon     Fri
 //   ↙↘     ↙↘
 //  Sun Tue Thu Sat
 
 #include <stdio.h>
-#include <stdlib.h> // malloc, free???
+#include <stdlib.h> // malloc, free
+#include <ctype.h>  // tolower
 
 typedef struct Entry
 {
-    char *key;      // Day (Sunday, ... , Saturday)
+    int key;      // Day (Sunday, ... , Saturday)
     char *value;    // Todo on that day
 
     struct Entry *left; 
@@ -33,7 +34,7 @@ int main(void)
     {
         return -1;
     }
-    tmp->key = "Wednesday";
+    tmp->key = 4;
     tmp->value = "Buy groceries";
     tmp->left = NULL;
     tmp->right = NULL;
@@ -46,7 +47,7 @@ int main(void)
         free(dictionary);
         return -1;
     }
-    tmp->key = "Monday";
+    tmp->key = 2;
     tmp->value = "Watch movie";
     tmp->left = NULL;
     tmp->right = NULL;
@@ -60,7 +61,7 @@ int main(void)
         free(dictionary);
         return -1;
     }
-    tmp->key = "Sunday";
+    tmp->key = 1;
     tmp->value = "Read books";
     tmp->left = NULL;
     tmp->right = NULL;
@@ -75,7 +76,7 @@ int main(void)
         free(dictionary);
         return -1;
     }
-    tmp->key = "Tuesday";
+    tmp->key = 3;
     tmp->value = "Make cookies";
     tmp->left = NULL;
     tmp->right = NULL;
@@ -91,7 +92,7 @@ int main(void)
         free(dictionary);
         return -1;
     }
-    tmp->key = "Friday";
+    tmp->key = 6;
     tmp->value = "Meet up with friends";
     tmp->left = NULL;
     tmp->right = NULL;
@@ -108,7 +109,7 @@ int main(void)
         free(dictionary);
         return -1;
     }
-    tmp->key = "Thursday";
+    tmp->key = 5;
     tmp->value = "Fix door";
     tmp->left = NULL;
     tmp->right = NULL;
@@ -126,13 +127,89 @@ int main(void)
         free(dictionary);
         return -1;
     }
-    tmp->key = "Saturday";
+    tmp->key = 7;
     tmp->value = "Clean house";
     tmp->left = NULL;
     tmp->right = NULL;
     dictionary->right->right = tmp;
+
+
+    // free dictionary
+    free(dictionary->right->right);
+    free(dictionary->right->left);
+    free(dictionary->right);
+    free(dictionary->left->right);
+    free(dictionary->left->left);
+    free(dictionary->left);
+    free(dictionary);
+
+    return 0;
 }
 
+int hash_key(char *string)
+{
+    // Ensure string is not emtpy
+    if (string == NULL)
+    {
+        printf("Failed to find hash value: Invalid string\n");
+        return -1;
+    }
+
+    // Convert string to all small letters
+    string = tolower(string);
+
+    // Return hash value according to string
+    // If there's none, return -1
+    if (string[0] == 's')
+    {
+        if (string[1] == 'u')
+        {
+            return 1;   // Sunday
+        }
+        else if (string[1] == 'a')
+        {
+            return 7;   // Saturday
+        }
+        else
+        {
+            printf("Failed to find hash value: Invalid string\n");
+            return -1;
+        }
+    }
+    else if (string[0] == 't')
+    {
+        if (string[1] == 'u')
+        {
+            return 3;   // Tuesday
+        }
+        else if (string[1] == 'h')
+        {
+            return 5;   // Thursday
+        }
+        else
+        {
+            printf("Failed to find hash value: Invalid string\n");
+            return -1;
+        }
+    }
+    else if (string[0] == 'm')
+    {
+        return 2;       // Monday
+    }
+    else if (string[0] == 'w')
+    {
+        return 4;       // Wednesday
+    }
+    else if (string[0] == 'f')
+    {
+        return 6;       // Friday
+    }
+    else
+    {
+        printf("Failed to find hash value: Invalid string\n");
+        return -1;
+    }
+}
 
 void find_dict(Entry *dict, char *key)
 {
