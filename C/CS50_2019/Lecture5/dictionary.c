@@ -15,12 +15,14 @@
 
 typedef struct Entry
 {
-    int key;      // Day (Sunday, ... , Saturday)
+    int key;        // Day (Sunday, ... , Saturday)
     char *value;    // Todo on that day
 
     struct Entry *left; 
     struct Entry *right;
 } Entry;
+
+int hash_key(char *string);
 
 
 int main(void)
@@ -146,6 +148,10 @@ int main(void)
     return 0;
 }
 
+// Function to find hash value of the string
+//  : return - corresponding hash value, if any
+//           - -1, otherwise
+//  : using one or two first letter(s)
 int hash_key(char *string)
 {
     // Ensure string is not emtpy
@@ -211,9 +217,30 @@ int hash_key(char *string)
     }
 }
 
-void find_dict(Entry *dict, char *key)
+// Function to get value corresponding to the key
+//  : return - pointer to char as a string that corresponds to key in given dictionary
+//           - NULL, otherwise
+char *get_dict(Entry *dict, char *key)
 {
+    // Find hash value of input key
+    int hash = hash_key(key);
 
+    // Ensure key has valid hash value
+    if (hash < 1 || hash > 7)
+    {
+        printf("Failed to get value: Invalid key\n");
+        return -1;
+    }
+
+    // Find entry with key hash
+    Entry *tmp = dict;
+    char *value = NULL;
+    if (tmp->key == hash)
+    {
+        value = tmp->key;
+        printf("Value of key \"%s\" is \"%s\".", key, value);
+        return value;
+    }
 }
 
 void search_dict(Entry *dict, char *value)
