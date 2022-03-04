@@ -229,18 +229,40 @@ char *get_dict(Entry *dict, char *key)
     if (hash < 1 || hash > 7)
     {
         printf("Failed to get value: Invalid key\n");
-        return -1;
+        return NULL;
     }
 
-    // Find entry with key hash
+    // Find entry with key hash (binary search)
+    // If found, print message and return value
+    // If not found, print message and return NULL
     Entry *tmp = dict;
     char *value = NULL;
-    if (tmp->key == hash)
+    while (tmp != NULL)
     {
-        value = tmp->key;
-        printf("Value of key \"%s\" is \"%s\".", key, value);
-        return value;
+        if (hash == tmp->key)
+        {
+            value = tmp->key;
+            printf("Value of key \"%s\" is \"%s\".", key, value);
+            return value;
+        }
+        else if (hash > tmp->key)
+        {
+            tmp = tmp->right;
+        }
+        else if (hash < tmp->key)
+        {
+            tmp = tmp->left;
+        }
+        else
+        {
+            printf("Value of key \"%s\" doesn't exist.\n", key);
+            return NULL;
+        }
     }
+
+    // If not found, print message and return NULL
+    printf("Value of key \"%s\" doesn't exist.\n", key);
+    return NULL;
 }
 
 void search_dict(Entry *dict, char *value)
