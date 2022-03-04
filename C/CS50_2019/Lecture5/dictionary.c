@@ -23,6 +23,7 @@ typedef struct Entry
 } Entry;
 
 int hash_key(char *string);
+char *get_dict(Entry *dict, char *key);
 
 
 int main(void)
@@ -265,7 +266,11 @@ char *get_dict(Entry *dict, char *key)
     return NULL;
 }
 
-void search_dict(Entry *dict, char *value)
+// Function to determine whether dictionary has entry including input value (string)
+//  : return - 1, if it has
+//           - 0, if it doensn't have
+//           - -1, otherwise
+int search_dict(Entry *dict, char *value)
 {
 
 }
