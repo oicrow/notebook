@@ -24,7 +24,7 @@ typedef struct Entry
 
 int hash_key(char *string);
 char *get_dict(Entry *dict, char *key);
-
+int search_dict(Entry *dict, char *value);
 
 int main(void)
 {
@@ -136,7 +136,12 @@ int main(void)
     tmp->right = NULL;
     dictionary->right->right = tmp;
 
+    // get Entries with key
+    char *result = NULL;
+    result = get_dict(dictionary, "Monday");
 
+    // search values
+    
     // free dictionary
     free(dictionary->right->right);
     free(dictionary->right->left);
@@ -272,5 +277,24 @@ char *get_dict(Entry *dict, char *key)
 //           - -1, otherwise
 int search_dict(Entry *dict, char *value)
 {
+    if (dict == NULL)
+    {
+        printf("\"%s\" is not in the dict.\n", value);
+        return 0;
+    }
+    else if (value < dict->value)
+    {
+        return search_dict(dict->left, value);
+    }
+    else if (value > dict->value)
+    {
+        return search_dict(dict->right, value);
+    }
+    else // if (value == dict->value)
+    {
+        printf("\"%i\" is founded.\n", value);
+        return 1;
+    }
 
+    return -1;
 }
