@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h> // malloc, free
 #include <ctype.h>  // tolower
+#include <string.h> // strcmp
 
 typedef struct Entry
 {
@@ -138,9 +139,29 @@ int main(void)
 
     // get Entries with key
     char *result = NULL;
+    
     result = get_dict(dictionary, "Monday");
+    printf("You need to %s today.\n", result);
+
+    get_dict(dictionary, "Monday");
+    get_dict(dictionary, "Tuesday");
+    get_dict(dictionary, "weDnesday");
+    get_dict(dictionary, "Thu");
+    get_dict(dictionary, "Fri");
+    get_dict(dictionary, "Sat.");
+    get_dict(dictionary, "M");
+    get_dict(dictionary, "cookie");
+    get_dict(dictionary, "cheese");
 
     // search values
+    int exists = -1;
+    exists = search_dict(dictionary, "Buy groceries");  // is founded.
+    exists = search_dict(dictionary, "Watch movie");    // is founded.
+    search_dict(dictionary, "Meet up with friends");    // is founded.
+    search_dict(dictionary, "Make cookies");            // is founded.
+    search_dict(dictionary, "Buy cookies");             // is not in the dictionary.
+    search_dict(dictionary, "Watch drama");             // is not in the dictionary.
+    search_dict(dictionary, "Clean keyboard");          // is not in the dictionary.
     
     // free dictionary
     free(dictionary->right->right);
@@ -167,18 +188,15 @@ int hash_key(char *string)
         return -1;
     }
 
-    // Convert string to all small letters
-    string = tolower(string);
-
     // Return hash value according to string
     // If there's none, return -1
-    if (string[0] == 's')
+    if (string[0] == 's' || string[0] == 'S')
     {
-        if (string[1] == 'u')
+        if (string[1] == 'u' || string[1] == 'U')
         {
             return 1;   // Sunday
         }
-        else if (string[1] == 'a')
+        else if (string[1] == 'a' || string[1] == 'A')
         {
             return 7;   // Saturday
         }
@@ -188,13 +206,13 @@ int hash_key(char *string)
             return -1;
         }
     }
-    else if (string[0] == 't')
+    else if (string[0] == 't' || string[0] == 'T')
     {
-        if (string[1] == 'u')
+        if (string[1] == 'u' || string[1] == 'U')
         {
             return 3;   // Tuesday
         }
-        else if (string[1] == 'h')
+        else if (string[1] == 'h' || string[1] == 'H')
         {
             return 5;   // Thursday
         }
@@ -204,15 +222,15 @@ int hash_key(char *string)
             return -1;
         }
     }
-    else if (string[0] == 'm')
+    else if (string[0] == 'm' || string[0] == 'M')
     {
         return 2;       // Monday
     }
-    else if (string[0] == 'w')
+    else if (string[0] == 'w' || string[0] == 'W')
     {
         return 4;       // Wednesday
     }
-    else if (string[0] == 'f')
+    else if (string[0] == 'f' || string[0] == 'F')
     {
         return 6;       // Friday
     }
@@ -247,8 +265,8 @@ char *get_dict(Entry *dict, char *key)
     {
         if (hash == tmp->key)
         {
-            value = tmp->key;
-            printf("Value of key \"%s\" is \"%s\".", key, value);
+            value = tmp->value;
+            printf("Value of key \"%s\" is \"%s\".\n", key, value);
             return value;
         }
         else if (hash > tmp->key)
@@ -279,22 +297,19 @@ int search_dict(Entry *dict, char *value)
 {
     if (dict == NULL)
     {
-        printf("\"%s\" is not in the dict.\n", value);
         return 0;
     }
-    else if (value < dict->value)
+    else if (strcmp(dict->value, value) == 0)
     {
-        return search_dict(dict->left, value);
-    }
-    else if (value > dict->value)
-    {
-        return search_dict(dict->right, value);
-    }
-    else // if (value == dict->value)
-    {
-        printf("\"%i\" is founded.\n", value);
+        printf("\"%s\" is founded.\n", value);
         return 1;
     }
-
-    return -1;
+    else if (search_dict(dict->right, value) == 1 || search_dict(dict->left, value) == 1)
+    {
+        return 1;
+    }
+    else // if (0 && 0) (both two sub-trees don't include the value)
+    {
+        return 0;
+    }
 }
