@@ -1,5 +1,5 @@
 from PIL import Image,  ImageFilter
 
-before = Image.open("bridge.bmp")
+before = Image.open("cookie.bmp")
 after = before.filter(ImageFilter.BLUR)
-after.save("out.bmp")
+after.save("cookie.bmp")
