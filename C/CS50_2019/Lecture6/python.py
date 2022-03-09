@@ -145,3 +145,6 @@ dictionary = {0:'a', 1:'b'}
 set_1 = set([0, 1, 2])
 
 
+# same code written in C and python
+# C: slower to write but faster to execute
+# python: faster to write but slower to execute
