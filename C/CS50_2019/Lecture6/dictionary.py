@@ -1,4 +1,3 @@
-#CS50 problem set 4 solved in python
 words = set()
 
 def check(word):

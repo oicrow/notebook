@@ -1,5 +1,8 @@
 from PIL import Image,  ImageFilter
 
-before = Image.open("cookie.bmp")
+# Open original image
+before = Image.open("Lecture6\ChocolateChipCookies.jpg")
+
+# Blur image
 after = before.filter(ImageFilter.BLUR)
-after.save("cookie.bmp")
+after.save("Lecture6\ChocolateChipCookies_blurred.jpg")
