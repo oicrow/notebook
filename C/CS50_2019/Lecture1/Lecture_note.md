@@ -4,7 +4,7 @@
  
 ## | Compile & Run
  What we write to code, is called **source code**. Source code is written in programming languages like C, Python, Java, etc. They're English-like syntax humans can read and write. But what machines, or computers understand is not that source code. Computers only understand binary--zeros and ones. That bunch of zeros and ones that corresponds to source code in binary, is called **machine code**. And the algorithm, or program, that converts source code into machine code, is a **compiler**.
-<img src="/C/CS50_2019/Lecture0/images/Lecture 0 - Computational Thinking, Scratch_01.png" title="compiler" alt="compiler"></img><br/>
+<img src="/C/CS50_2019/Lecture1/images/Lecture 1 - C_01.png" title="compiler" alt="compiler"></img><br/>
  Say there's a source code that print "hello, world" in the terminal. The source code would look like the left page. English-like syntax. But if you compile it through compiler, the result would be like that right page. A machine code. That is what computers can understand and execute.
 
 
