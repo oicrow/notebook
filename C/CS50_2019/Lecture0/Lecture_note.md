@@ -12,3 +12,4 @@ We, humans, use **decimal**, which use ten(dec) digits, 0 to 9, to represent num
 
 ## Binary
 But computers have only two(bi) digits, 0 and 1, so called **binary**. Binary works exactly the same as  decimal, except that it uses 2 instead of 10. So columns in binary is powers of 2. If we kept going, it'd be one, two, four, eight, and sixteen instead of one, ten, hundred, thousand, and ten thousand.   
+<p align="center"><img src="/C/CS50_2019/Lecture0/images/Lecture 0 - Computational Thinking, Scratch_04.png" width="45%" height="45%" title="binary digits" alt="binary digits"></img>&nbsp;&nbsp;<img src="/C/CS50_2019/Lecture0/images/Lecture 0 - Computational Thinking, Scratch_05.png" width="45%" height="45%" title="binary" alt="binary"></img></p>  
