@@ -1,4 +1,5 @@
 \*note: this is a lecture note I wrote based on CS50 2019 lecture 0.
+\*note: all pictures used are from CS50 course materials.
 
 # What is Computer Science?
 It's a process of **solving problems**. Solving problem means: You've got some input and the goal is to get some output, the solution, to that particular problem. That process in between, called **algorithm** is where computer science comes in.   
