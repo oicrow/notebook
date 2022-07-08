@@ -70,4 +70,39 @@ The third one is, to go to the middle, and go to the middle of one half side whi
 The first and second algorithms are 'not wrong', but they're also 'not effective' at the same time. Time it takes with them increases in direct proportional to the size of the problem. If the pages of the book doubles, it takes double. But the third one, on the contrary, is much more effective, since the time increases in proportion to just a logarithmic function. As the graph of a logarithmic function we know, the time to solve increases so slowly that it is really time-effective for huge sets of data. The difference is evident in the image on the right.   
    
 <p align="center"><img src="/C/CS50_2019/Lecture0/images/Lecture 0 - Computational Thinking, Scratch_11.png" width="70%" height="70%" title="complexity graph" alt="complexity graph"></img></p>    
+
+   
+## Pseudocode
+**Pseudocode** has no one specific definition, but is code-like syntax written in any language. It represent step-by-step instructions for computers in a succinct way with no specific rules. But it has some commonalities shared with most of the computer languages.   
+   
+Let's take a look at the example of finding Mike Smith. If we describe the third algorithm in a pseudocode, it would be like this:   
+
+<p align="center"><img src="/C/CS50_2019/Lecture0/images/Lecture 0 - Computational Thinking, Scratch_12.png" width="70%" height="70%" title="pseudocode" alt="pseudocode"></img></p>    
+   
+**Functions** are the actions for computer to conduct, or verbs. 'Pick up', 'Open to', 'Look at', 'Call' and 'Quit' would be those functions.   
+   
+**Conditions** are the branches of what to do. They divide algorithms into several paths, to make the algorithms more adaptive or useful, so to speak. 'If', 'Else if', 'Else' would correspond to conditions.   
+   
+**Booleans** are questions that have only yes or no answers, which match true or false, and 1 or 0. They're used to decide what path to take when encountering conditions. In this example, 'Smith is on page', 'Smith is earlier in book', 'Smith is later in book' would be the booleans.   
+   
+Lastly, **loops** are a cycle that makes computers do something again and again. 'Go back to line 3' is the loop in this pseudocode.   
+   
+Besides what is in this example, there are more common fundamental elements universal to almost every language, like variables, threads, or events. Those are available in almost every programming language like C, python, and java.   
+
+<p align="center"><img src="/C/CS50_2019/Lecture0/images/Lecture 0 - Computational Thinking, Scratch_13.png" width="70%" height="70%" title="C" alt="C"></img></p>    
+
+   
+## Scratch
+There's a graphical language from MIT's Media Lab called [**Scratch**](https://scratch.mit.edu/, "scratch link"). It works by dragging and dropping the blocks, or the puzzle pieces that interlock together. You can download the app and edit offline, but you can also use scratch project editor in most browsers online.   
+   
+Scratch, which is also a kind of programming language though super user-friendly, also can represent commonalities of programming languages. Through scratch, we can represent things like:   
+<br>
+> Functions, Arguments, Return Values   
+> Variables   
+> Boolean Expressions, Conditions   
+> Loops   
+> Events   
+> Threads   
+   
+<p align="center"><img src="/C/CS50_2019/Lecture0/images/Lecture 0 - Computational Thinking, Scratch_14.png" width="45%" height="45%" title="scratch block" alt="scratch block"></img>&nbsp;&nbsp;<img src="/C/CS50_2019/Lecture0/images/Lecture 0 - Computational Thinking, Scratch_15.png" width="45%" height="45%" title="scratech screen" alt="screen screen"></img></p>  
    
