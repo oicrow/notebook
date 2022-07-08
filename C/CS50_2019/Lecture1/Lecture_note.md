@@ -176,12 +176,12 @@ How to use **for loop**
 <br>
 <br>
 
-#Limitations of Computation
+# Limitations of Computation
 Computers do have their own limitations. Since they are also physically finite machine, there has to be a limitation on how much computers can store memory.   
-
+   
 <br>
 
-##RAM
+## RAM
 **RAM** is where all of the programs and files are stored while they're running, or open. Computer uses it to do multiple things at once and keep things in memory.   
 
 <br><p align="center"><img src="/C/CS50_2019/Lecture1/images/Lecture 1 - C_08.png" width="70%" height="70%" title="RAM" alt="RAM"></img></p><br>
