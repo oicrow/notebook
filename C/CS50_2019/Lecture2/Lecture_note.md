@@ -47,58 +47,63 @@ Even though other people had used the expression 'bug' before to refer to mistak
 <br><p align="center"><img src="/C/CS50_2019/Lecture2/images/Lecture 2 - Arrays_07.png" width="70%" height="70%" title="Hopper's note" alt="Hopper's note"></img></p><br>
 
 ## Syntax Error Debugging with CS50 debug helper
+`help50` is a CS50 specific helping tools, which helps interpreting error messages so that you can debug when you're running a command. You can use this command as `help50 make (file name)`. Then computer wiil make your file, and if there's any error message, help50 will interpret it for you instead.   
+   
+CS50 also provies other commands like `check50`, which the professor use to grade and automatically feedback on code, and `style50`, which helps you to write prettier code.   
 
- 'help50' is a CS50 specific helping tools, which helps interpreting error messages so that you can debug when you're running a command. You can use this command as 'help50 make (file name)'. Then computer wiil make your file, and if there's any error message, help50 will interpret it for you instead.
+<br><p align="center"><img src="/C/CS50_2019/Lecture2/images/Lecture 2 - Arrays_08.png" width="70%" height="70%" title="CS50 supports" alt="CS50 supports"></img></p><br>
 
- CS50 also provies other commands like 'check50', which the professor use to grade and automatically feedback on code, and 'style50', which helps you to write prettier code.
+CS50 also provides CS50 IDE, which includes the commands above. IDE is an acronym of integrated Development Environment. There are also a lot of IDEs, like Eclipse and Visual studio. They all provide useful debugging tools.   
 
- CS50 also provides  CS50 IDE, which includes the commands above. IDE is an acronym of integrated Development Environment. There are also a lot of IDEs, like Eclipse and Visual studio. They all provide useful debugging tools.
+<br>
 
+## Logical Error Debugging with Break point
+If you click to the left of the line numbers in IDE, including CS50 IDE, it puts a red dot, called **breakpoint**, which represents a sign to stop here. It is a very common feature of IDE, which tells the computer in advance not to run just as usual, and to stop there instead, and allow the human to step through the code, step by step. This is available in almost all IDEs around the world.   
+   
+In CS50 IDE, you can use this feature by command as `debug50 ./(file name)`.   
+   
+If you use a breakpoint, you can see a debugger window. You can step over, one line at a time. While doing this, you can check in the debugger window what's going on in your computer step by step.   
+   
+Another debugging way for logical error is to use `printf`. You may use this function to explicitly visualize what's going on in your computer, so that you can find out where a problem resides.   
 
+<br>
 
-| Logical Error Debugging with Break point
- If you click to the left of the line numbers in IDE, including CS50 IDE, it puts a red dot, called breakpoint, which represents a sign to stop here. It is a very common feature of IDE, which tells the computer in advance not to run just as usual, and to stop there instead, and allow the human to step through the code, step by step. This is available in almost all IDEs around the world.
-
- In CS50 IDE, you can use this feature by command as: debug50 ./(file name)
-
- If you use a breakpoint, you can see a debugger window. You can step over, one line at a time. While doing this, you can check in the debugger window what's going on in your computer step by step.
-
- Another debugging way for logical error is to use 'printf'. You may use this function to explicitly visualize what's going on in your computer, so that you can find out where a problem resides.
-
-
-
-| Additional Human mechanism for debugging
- If you have a syntax error, you can use help50, if you're using CS50 IDE, or read the error message you got. On the other hand, if you have a logical error, you can use breakpoint debugger. But there's another debugging, which is universal.
-
- It's called rubber duck debugging. It's a term of art in computer science. It means that you can have one of little things on your desk and start talking to explain to it what your code is doing, walking through it line by line verbally until you hopefully self-induce what's wrong with your code.
-
- Another thing is just steping back. You can take a walk, sleep, grab a coffee, for a moment to refresh, and then start working on it again.
+## Additional Human mechanism for debugging
+If you have a syntax error, you can use help50, if you're using CS50 IDE, or read the error message you got. On the other hand, if you have a logical error, you can use breakpoint debugger. But there's another debugging, which is universal.   
+   
+It's called **rubber duck debugging**. It's a term of art in computer science. It means that you can have one of little things on your desk and start talking to explain to it what your code is doing, walking through it line by line verbally until you hopefully self-induce what's wrong with your code.   
+   
+Another thing is just steping back. You can take a walk, sleep, grab a coffee, for a moment to refresh, and then start working on it again.   
 
 <br>
 <br>
 
 # Array
+In the quality of software, you can refer to not only correctness, but also design and style. As we said, style of code refers to pretty code, which includes legibility and readability. And the design of software means efficiency of code. You can save a lot of resources like time, money, memory, CPU cycles with well-designed program. And the one of the first step toward good design, is an array.   
 
- In the quality of software, you can refer to not only correctness, but also design and style. As we said, style of code refers to pretty code, which includes legibility and readability. And the design of software means efficiency of code. You can save a lot of resources like time, money, memory, CPU cycles with well-designed program. And the one of the first step toward good design, is an array.
+<br>
 
+## Memory, RAM
+Any types of data take up specific amount of memory. bool, char, int, float, long, and double all take up the fixed number of bytes. That taken memory is located in RAM, random access memory, which is one of the pieces of hard drive.   
 
+<br><p align="center"><img src="/C/CS50_2019/Lecture2/images/Lecture 2 - Arrays_09.png" width="70%" height="70%" title="memory each data type uses" alt="memory each data type uses"></img></p><br>
 
-| Memory, RAM
- Any types of data take up specific amount of memory. bool, char, int, float, long, and double all take up the fixed number of bytes. That taken memory is located in RAM, random access memory, which is one of the pieces of hard drive.
- The black chip on RAM has some number of bytes that can be allocated. The bytes are so small that the tiny chip represents billions of bytes. This chip is where information is store while running a software.
- So, if you stored a char, you allocate 1 byte of the RAM, and 4 bytes if you stored an integer, somewhere in RAM.
+The black chip on RAM has some number of bytes that can be allocated. The bytes are so small that the tiny chip represents billions of bytes. This chip is where information is store while running a software.   
+   
+So, if you stored a char, you allocate 1 byte of the RAM, and 4 bytes if you stored an integer, somewhere in RAM.   
 
+<br>
 
-| Array
- An array is a list of value that can be all the same type in a variable of the same name. You can use array like below.
+## Array
+An array is a list of value that can be all the same type in a variable of the same name. You can use array like below.   
 
     (data type of array) (array name)[(the number of values)];
 
- And, `(arrayname)[(number)]` represents the number-th entry of the array. Of course, this starts counting from zero. But the number of values counts from one. Because it needs null terminator `/0` to represent the end of the array.
+And, `(arrayname)[(number)]` represents the number-th entry of the array. Of course, this starts counting from zero. But the number of values counts from one. Because it needs null terminator `/0` to represent the end of the array.   
 
+<br>
 
-
-| string using array
-In the point of array, string can be viewed as the array of char, character. So you can make string as follow.
+## string using array
+In the point of array, string can be viewed as the array of char, character. So you can make string as follow.  
 
     char* (string name) = "(string)";
