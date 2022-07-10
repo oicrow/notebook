@@ -83,34 +83,42 @@ On the other hand, you can also think of omega value of those algorithms to comp
 # Sort Algorithms
 To adopt more efficinet algorithms to search, you need to sort first. **Sorting algorithms** also require certain amounts of operations. In sort algorithm, the input would be an unsorted array and the output would be a sorted array. Let's see how we can sort a data set and compare their efficiency.   
 
-<br>
+<br><p align="center"><img src="/C/CS50_2019/Lecture3/images/Lecture 3 - Algorithm_11.png" width="70%" height="70%" title="sorting problem" alt="sorting problem"></img></p><br>
 
 ## Bubble Sort
- The first algorithm you could come up with is something called, bubble sort. It means to switch items when the right one is bigger than the left one. If you repeat this again and again, you'll finally reach the sorted array of numbers. You can also write this sorting algorithm a la psuedocode. See the image on the right side.
+The first algorithm you could come up with is something called, **bubble sort**. It means to switch items when the right one is bigger than the left one. If you repeat this again and again, you'll finally reach the sorted array of numbers. You can also write this sorting algorithm as a psuedocode.
 
- If there are n numbers to sort, you need to repeat it (n-1)x(n-1) times. Because it requires n-1 operations to go through the array once, and you need to go through the array n-1 times.
+<br><p align="center"><img src="/C/CS50_2019/Lecture3/images/Lecture 3 - Algorithm_12.png" width="70%" height="70%" title="bubble sort pseudocode" alt="bubble sort pseudocode"></img></p><br>
 
- To represent this as big O notation, it would be O(n^2). Although (n-1)x(n-1) is 'n^2 - 2n + 1', you would simplify this as 'n^2' since big O notation refers to just an approximation. So bubble sort is on the order of n^2.
+If there are n numbers to sort, you need to repeat it (n-1)x(n-1) times. Because it requires n-1 operations to go through the array once, and you need to go through the array n-1 times.   
+   
+To represent this as big O notation, it would be **O(n<sup>2</sup>)**. Although (n-1)x(n-1) is 'n<sup>2</sup> - 2n + 1', you would simplify this as 'n<sup>2</sup>' since big O notation refers to just an approximation. So bubble sort is **on the order of n<sup>2</sup>**.   
 
- On the other hand, since bubble sort doesn't check if the array is already sorted, there's no chance to reduce running time. That means that the omega value of it is also n^2. So, bubble sort is in omega of n^2(Ω(n^2)).
+<br><p align="center"><img src="/C/CS50_2019/Lecture3/images/Lecture 3 - Algorithm_13.png" width="70%" height="70%" title="bubble sort running time" alt="bubble sort running time"></img></p><br>
 
- But, you can modify your pseudocode so that you can make omega value a little smaller. You can use 'repeat until no swaps', instead 'repeat n-1 times'. It can reduce running time at some case, because there would be no swaps no later than n-1 times. Then the lower bound of running time should be n-1, reduced into n. So, the revised bubble sort algorithm is in omega of n(Ω(n)).
+On the other hand, since bubble sort doesn't check if the array is already sorted, there's no chance to reduce running time. That means that the omega value of it is also n<sup>2</sup>. So, bubble sort is **in omega of n<sup>2</sup> (Ω(n<sup>2</sup>))**.   
+   
+But, you can modify your pseudocode so that you can make omega value a little smaller. You can use `repeat until no swaps`, instead `repeat n-1 times`. It can reduce running time at some case, because there would be no swaps no later than n-1 times. Then the lower bound of running time should be n-1, reduced into n. So, the revised bubble sort algorithm is **in omega of n(Ω(n))**.
 
+<br><p align="center"><img src="/C/CS50_2019/Lecture3/images/Lecture 3 - Algorithm_14.png" width="70%" height="70%" title="revised bubble sort" alt="revised bubble sort"></img></p><br>
 
+## Selection Sort
+You can also think of another algorithm, so-called **selection sort**. You can do this by finding the smallest item among unsorted items yet and placing it on the right next to the place of sorted items. If you keep doing this, you'll eventually get the sorted list of numbers. You can write it as  psuedocode. See the image below.   
 
-| Selection Sort
- You can also think of another algorithm, so-called selection sort. You can do this by finding the smallest item among unsorted items yet and placing it on the right next to the place of sorted items. If you keep doing this, you'll eventually get the sorted list of numbers. You can write it as  psuedocode. See the image on the right side.
+<br><p align="center"><img src="/C/CS50_2019/Lecture3/images/Lecture 3 - Algorithm_15.png" width="70%" height="70%" title="selection sort pseudocode" alt="selection sort pseudocode"></img></p><br>
 
- If there are n numbers to sort, you need to repeat this operation n + (n-1) + … + 1 times. This is because you need to conduct n-1 comparing operations to find the smallest item and 1 operation to swap, given that n is the number of unsorted items.
+If there are n numbers to sort, you need to repeat this operation n + (n-1) + … + 1 times. This is because you need to conduct n-1 comparing operations to find the smallest item and 1 operation to swap, given that n is the number of unsorted items.   
+   
+To represent this as big O notation, it would be **O(n<sup>2</sup>)**. Although n + (n-1) + … + 1 is (n<sup>2</sup> + n)/2, you would simplify this as 'n<sup>2</sup>' since big O notation refers to just an approximation. So selection sort is **on the order of n<sup>2</sup>**.   
 
- To represent this as big O notation, it would be O(n^2). Although n + (n-1) + … + 1 is (n^2 + n)/2, you would simplify this as 'n^2' since big O notation refers to just an approximation. So selection sort is on the order of n^2.
+<br><p align="center"><img src="/C/CS50_2019/Lecture3/images/Lecture 3 - Algorithm_16.png" width="70%" height="70%" title="selection sort running time" alt="selection sort running time"></img></p><br>
+   
+Meanwhile, as to omega value of this sorting algorithm, this also has no possibility to save some operations, since it is just working on, no matter the array is already sorted or not. As a result, selection sort is also **in omega of n<sup>2</sup> (Ω(n<sup>2</sup>))**.   
 
- Meanwhile, as to omega value of this sorting algorithm, this also has no possibility to save some operations, since it is just working on, no matter the array is already sorted or not. As a result, selection sort is also in omega of n^2(Ω(n^2)).
+<br>
 
-
-
-| Merge Sort
- Here is another groundbreaking algorithm for sorting, called merge sort. It uses recursion, which is detailed below. The key idea of this is to sort the left half, sort the right half and merge those two sorted halves. It will be writen like the code on the right, if you write it in the form of pseudocode.
+## Merge Sort
+Here is another groundbreaking algorithm for sorting, called merge sort. It uses recursion, which is detailed below. The key idea of this is to sort the left half, sort the right half and merge those two sorted halves. It will be writen like the code on the right, if you write it in the form of pseudocode.
 
  If you were to sort the array of numbers "74526381", you can divide it into two halves, "7452" and "6381". Now you have two smaller arrays to sort. If you repeat this operation again and again, you will finially reach "12345678", in the end.
 
