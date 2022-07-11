@@ -141,7 +141,7 @@ Meanwhile, it does the same thing always, even if the array is already sorted. S
 <br>
 
 ## Example 1 - Finding Mike Smith
-See the codes below. It is the very pseudocode we discussed in week 0. In the line 8 and 11, there are "Go back to" commands, which stand for loops. In the code right below, it used "Search left/right half of book" commands, which stand for recursion instead. As you see, the lower code looks much simpler.   
+See the codes below. It is the very pseudocode we discussed in week 0. In the line 8 and 11, there are "Go back to" commands, which stand for loops. In the code on the right, it used "Search left/right half of book" commands, which stand for recursion instead. As you see, the code on the right looks much simpler.   
 
 <br><p align="center"><img src="/C/CS50_2019/Lecture3/images/Lecture 3 - Algorithm_19.png" width="45%" height="45%" title="recursion finding mike smith" alt="recursion finding mike smith"></img>&nbsp;&nbsp;<img src="/C/CS50_2019/Lecture3/images/Lecture 3 - Algorithm_20.png" width="45%" height="45%" title="recursion finding mike smith" alt="recursion finding mike smith"></img></p><br>
 
@@ -228,7 +228,7 @@ numbers[2] = 50;
 ## strcmp
 **`strcmp`** is a function that 'compares strings', which is declared in the header file `string.h`. You can use it like below.   
 
-```
+``` C
 #include <stdio.h>
 #include <string.h>
 
@@ -260,7 +260,7 @@ structure_name;
 **`struct`** over there means **structure**, which refers to a container, inside of which you can put multiple other data types. That is, structure is a container for multiple data types.   
 After delaring a new data type of yours, you can use it just like other data types like int, char, or bool. But note that you need to refer to data_name of structure. See the code below.   
 
-```
+``` C
 typedef struct
 {
   int age;
