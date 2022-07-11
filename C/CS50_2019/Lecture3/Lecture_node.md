@@ -118,145 +118,162 @@ Meanwhile, as to omega value of this sorting algorithm, this also has no possibi
 <br>
 
 ## Merge Sort
-Here is another groundbreaking algorithm for sorting, called merge sort. It uses recursion, which is detailed below. The key idea of this is to sort the left half, sort the right half and merge those two sorted halves. It will be writen like the code on the right, if you write it in the form of pseudocode.
+Here is another groundbreaking algorithm for sorting, called **merge sort**. It uses recursion, which is detailed below. The key idea of this is to sort the left half, sort the right half and merge those two sorted halves. It will be writen like the code below, if you write it in the form of pseudocode.   
 
- If you were to sort the array of numbers "74526381", you can divide it into two halves, "7452" and "6381". Now you have two smaller arrays to sort. If you repeat this operation again and again, you will finially reach "12345678", in the end.
+<br><p align="center"><img src="/C/CS50_2019/Lecture3/images/Lecture 3 - Algorithm_17.png" width="70%" height="70%" title="merge sort pseudocode" alt="merge sort pseudocode"></img></p><br>
 
- Then, how efficient this algorithm is? Just look at the picutre below on the right side and think for a second. Horizontally, you need n, which is 8 in this case, operations in total to merge items, and vertically, you have to repeat this log base 2 of n, which is 4 in this case, times to fully sort the array. So you need n times log n operations, in this case, 8 times 4, which equals 32.
+If you were to sort the array of numbers "74526381", you can divide it into two halves, "7452" and "6381". Now you have two smaller arrays to sort. If you repeat this operation again and again, you will finially reach "12345678", in the end.   
 
- To generalize, merge sort requires n x log n times to run. That is, merge sort is on the order of n x log n(O(n log n)).
+<br><p align="center"><img src="/C/CS50_2019/Lecture3/images/Lecture 3 - Algorithm_18.png" width="70%" height="70%" title="merge sort example" alt="merge sort example"></img></p><br>
 
- Meanwhile, it does the same thing always, even if the array is already sorted. So there's no room for reducing running time. Consequently, merge sort is also in omega of n x log n(O(n log n))
+How efficient this algorithm is? Just look at the picutre below on the right side and think for a second. Horizontally, you need n, which is 8 in this case, operations in total to merge items, and vertically, you have to repeat this log base 2 of n, which is 4 in this case, times to fully sort the array. So you need n times log n operations, in this case, 8 times 4, which equals 32.   
+   
+To generalize, merge sort requires *n*log*n* times to run. That is, merge sort is **on the order of *n*log*n* (*O*(*n*log*n*))**.   
+   
+Meanwhile, it does the same thing always, even if the array is already sorted. So there's no room for reducing running time. Consequently, merge sort is also **in omega of *n*log*n* (*O*(*n*log*n*))**.   
+   **.   
 
 <br>
 <br>
 
 # Recursion
-Recursion is a key idea of algorithm. Recursion is a technique in programming, whereby you implement an algorithm that calls itself. With recursion, you can make your algorithm to iterate again and again. That means, you don't need loops to make it perform iteration, with much more succinct code.
+**Recursion** is a key idea of algorithm. Recursion is a technique in programming, whereby you implement an algorithm that calls itself. With recursion, you can make your algorithm to iterate again and again. That means, you don't need loops to make it perform **iteration**, with much more succinct code.   
 
+<br>
 
+## Example 1 - Finding Mike Smith
+See the codes below. It is the very pseudocode we discussed in week 0. In the line 8 and 11, there are "Go back to" commands, which stand for loops. In the code right below, it used "Search left/right half of book" commands, which stand for recursion instead. As you see, the lower code looks much simpler.   
 
-| Example 1 - Finding Mike Smith
-  See the codes on the right side. It is the very pseudocode we discussed in week 0. In the line 8 and 11, there are "Go back to" commands, which stand for loops. In the code right below, it used "Search left/right half of book" commands, which stand for recursion instead. As you see, the lower code looks much simpler.
+<br><p align="center"><img src="/C/CS50_2019/Lecture3/images/Lecture 3 - Algorithm_19.png" width="45%" height="45%" title="recursion finding mike smith" alt="recursion finding mike smith"></img>&nbsp;&nbsp;<img src="/C/CS50_2019/Lecture3/images/Lecture 3 - Algorithm_20.png" width="45%" height="45%" title="recursion finding mike smith" alt="recursion finding mike smith"></img></p><br>
 
+## Example 2 - Printing Stairs
+Let's suppose that you're making a program that gets input as height and prints stairs of that height.   
+   
+You can program this stair-printing algorithm using loops, as we did before. The code would be like below.   
+   
+``` C
+#include <stdio.h>
 
+void draw(int h);
 
-| Example 2 - Printing Stairs
- Let's suppose that you're making a program that gets input as height and prints stairs of that height.
-
- You can program this stair-printing algorithm using loops, as we did before. The code would be like below.
-
-	1	#include <stdio.h>
-	2	
-	3	void draw(int h);
-	4	
-	5	int main(void)
-	6	{
-	7	    int height;
-	8	    scanf("%d, &height);
-	9	    draw(height);
-	10	}
-	11	
-	12	void draw(int h)
-	13	{
-	14	    for (int i = 1; i <= h; i++)
-	15	    {
-	16	        for (int j = 1; j <= i; j++)
-	17	        {
-	18	            printf("#");
-	19	        }
-	20	        printf("\n");
-	21	    }
-	22	}
+int main(void)
+{
+  int height;
+  scanf("%d, &height);
+  draw(height);
+}
 	
-  As you see, loops are used in the function draw. But instead, you can use recursion. Pyramid of size 4 is the sum of pyramid of size 3 and 4th row. Likewise, pyramid of size 3 is the sum of pyramid of size 2 and 3rd row. With this idea, you can code the same program with differnt algorithm using recursion, as follows.
+void draw(int h)
+{
+  for (int i = 1; i <= h; i++)
+  {
+    for (int j = 1; j <= i; j++)
+    {
+      printf("#");
+    }
+    printf("\n");
+  }
+}
+```
+   
+As you see, loops are used in the function draw. But instead, you can use recursion. Pyramid of size 4 is the sum of pyramid of size 3 and 4th row. Likewise, pyramid of size 3 is the sum of pyramid of size 2 and 3rd row. With this idea, you can code the same program with differnt algorithm using recursion, as follows.   
 
-	1	#include <stdio.h>
-	2	
-	3	void draw(int h);
-	4	
-	5	int main(void)
-	6	{
-	7	    int height;
-	8	    scanf("%d, &height);
-	9	    draw(height);
-	10	}
-	11	
-	12	void draw(int h)
-	13	{
-	14	    if (h == 0)
-	15	    {
-	16	        return;
-	17	    }
-	18	    draw(h-1);
-	19	    
-	20	    for (int i = 0; i < h; i++)
-	21	    {
-	22	        printf("#");
-	23	    }
-	24	    printf("\n");
-	25	}
+``` C
+#include <stdio.h>
+	
+void draw(int h);
+
+int main(void)
+{
+  int height;
+  scanf("%d", &height);
+  draw(height);
+}
+
+void draw(int h)
+{
+  if (h == 0)
+  {
+    return;
+  }
+  draw(h-1);
+  
+  for (int i = 0; i < h; i++)
+  {
+    printf("#");
+  }
+  printf("\n");
+}
+```
 
 <br>
 <br>
 
 # C programming
-During Lecture 3 Algorithms, you could learn some functions or grammars of C. See the summary at the below.
+During Lecture 3 Algorithms, you could learn some functions or grammars of C. See the summary at the below.   
 
+<br>
 
+## Arrays
+You know what is an array, but you can initialize elements of an array more easily like below.   
 
-| Arrays
- You know what is an array, but you can initialize elements of an array more easily like below.
+``` C
+int numbers[3];
+numbers[0] = 20;     // ->  int numbers[3] = { 20, 19, 50 };
+numbers[1] = 19;
+numbers[2] = 50;
+```
 
-	1	int numbers[3];			1	int numbers[3] = { 20, 19, 50};
-	2	numbers[0] = 20;		->		
-	3	numbers[1] = 19;				
-	4	numbers[2] = 50;				
+<br>
 
+## strcmp
+**`strcmp`** is a function that 'compares strings', which is declared in the header file `string.h`. You can use it like below.   
 
+```
+#include <stdio.h>
+#include <string.h>
 
-| strcmp
- strcmp is a function that 'compares strings', which is declared in the header file 'string.h'. You can use it like below.
-
-	1	#include <stdio.h>
-	2	#include <string.h>
-	3	
-	4	int main(void)
-	5	{
-	6	    char *s1 = "Hello";
-	7	    char *s2 = "Hello";
-	8	    printf("%d\n", strcmp(s1, s2));
-	9	    return 0;
-	10	}
+int main(void)
+{
+  char *s1 = "Hello";
+  char *s2 = "Hello";
+  printf("%d\n", strcmp(s1, s2));
+  return 0;
+}
+```
 	
- strcmp returns 0 when the two strings are the same. Negative one or positive one is returend when those are different. In this case, since s1 and s2 are same, computer prints '0', which means that they are same.
+`strcmp` returns `0` when the two strings are the same. Negative one or positive one is returend when those are different. In this case, since s1 and s2 are same, computer prints `0`, which means that they are same.   
 
+<br>
 
+## typedef
+You can also make your own datatype by using **`typedef`**. It enables you to customize a data type. You can make your customized data type as follows.   
 
-| typedef
- You can also make your own datatype by using 'typedef'. It enables you to customize a data type. You can make your customized data type as follows.
+``` C
+typedef struct
+{
+  data_type data_name;
+  …
+}
+structure_name;
+```
 
-	1	typedef struct
-	2	{
-	3	    data_type data_name;
-	…	    …
-	…+1	}
-	…+2	structure_name;
-	
- 'struct' over there means structure, which refers to a container, inside of which you can put multiple other data types. That is, structure is a container for multiple data types.
- After delaring a new data type of yours, you can use it just like other data types like int, char, or bool. But note that you need to refer to data_name of structure. See the code below.
+**`struct`** over there means **structure**, which refers to a container, inside of which you can put multiple other data types. That is, structure is a container for multiple data types.   
+After delaring a new data type of yours, you can use it just like other data types like int, char, or bool. But note that you need to refer to data_name of structure. See the code below.   
 
-	…	
-	+1	typedef struct
-	+2	{
-	+3	    int age;
-	+4	    char grade;
-	+5	}
-	+6	student;
-	+7	
-	+8	int main(void)
-	+9	{
-	+10	    student student_1;
-	+11	    student_1.age = 17;
-	+12	    student_2. grade = 'A';
-	…	
+```
+typedef struct
+{
+  int age;
+  char grade;
+}
+student;
+
+int main(void)
+{
+  student student_1;
+  student_1.age = 17;
+  student_2. grade = 'A';
+  // ...
+}
+```
