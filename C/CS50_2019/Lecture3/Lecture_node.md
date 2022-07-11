@@ -130,8 +130,7 @@ How efficient this algorithm is? Just look at the picutre below on the right sid
    
 To generalize, merge sort requires *n*log*n* times to run. That is, merge sort is **on the order of *n*log*n* (*O*(*n*log*n*))**.   
    
-Meanwhile, it does the same thing always, even if the array is already sorted. So there's no room for reducing running time. Consequently, merge sort is also **in omega of *n*log*n* (*O*(*n*log*n*))**.   
-   **.   
+Meanwhile, it does the same thing always, even if the array is already sorted. So there's no room for reducing running time. Consequently, merge sort is also **in omega of *n*log*n* (*Ω*\(*n*log*n*\))**.   
 
 <br>
 <br>
