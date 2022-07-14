@@ -1,3 +1,7 @@
+// Date Created: 2022-07-14
+// Date Edited : 2022-07-14
+// Chapter     : Ch5-1. 데스크톱 어플리케이션 만들기
+
 import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
