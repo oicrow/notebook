@@ -5,7 +5,7 @@ namespace qsharp
 {
   public class Driver
   {
-    public static void Main(string[] args)
+    public static void Main(String[] args)
     {
       Hello.Run(new QuantumSimulator()).Wait();
     }
