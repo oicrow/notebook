@@ -3,7 +3,7 @@
 // Difficulty   : Bronze 5
 // Step         : 1
 // Language     : C99
-// Source Link  : https://www.acmicpc.net/source/
+// Source Link  : https://www.acmicpc.net/source/46585310
 
 // #define _CRT_SECURE_NO_WARNINGS // for VS Studio (not required in BOJ)
 #include <stdio.h>
