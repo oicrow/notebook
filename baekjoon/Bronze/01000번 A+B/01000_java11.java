@@ -5,6 +5,7 @@
 // Language     : java11
 // Source Link  : https://www.acmicpc.net/source/46587221
 
+// using scanner
 import java.util.Scanner;
 
 public class Main{
@@ -20,5 +21,26 @@ public class Main{
 		System.out.println(A+B);
 		
 		sc.close();
+	}
+}
+
+// Scanner takes much more time than using System.in.read(), which is basic IO
+// https://travislife.tistory.com/48
+// NOTE: this only works for 0 < A, B < 10
+
+import java.io.*; // import java.io.IOException; is also acceptable
+
+public class Main {
+	public static void main(String[] args) throws IOException {
+		int a = System.in.read(); // get one character as ASCII int
+		System.in.read();
+		int b = System.in.read(); // get one character as ASCII int
+		System.in.read();
+		
+		// ASCII int to real int
+		a = a-48;
+		b = b-48;
+		
+		System.out.println(a+b);
 	}
 }
